@@ -4,6 +4,7 @@ import Login from "./pages/Login"
 import Home from "./pages/Home"
 import { useDispatch } from "react-redux";
 import { setUser } from "./store/slices/AuthSlice";
+import PrivateRoutes from "./components/PrivateRoutes";
 
 function App() {
   const dispatch = useDispatch()
@@ -15,7 +16,9 @@ function App() {
     <Routes>
       <Route path="/" element={<Navigate to='/login' replace />} />
       <Route path="/login" element={<Login />} />
-      <Route path="/Home" element={<Home />} />
+      <Route path="/Home" element={<PrivateRoutes>
+        <Home />
+      </PrivateRoutes>} />
     </Routes>
   );
 }

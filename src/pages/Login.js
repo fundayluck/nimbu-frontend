@@ -18,8 +18,6 @@ const Login = () => {
 
     const [login, { data, isError, isLoading, isSuccess, error }] = useLoginMutation()
 
-    console.log(isSuccess);
-
     useEffect(() => {
         if (isError === true) {
             setErrorMsg(error.data.error)
