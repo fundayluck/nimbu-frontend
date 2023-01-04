@@ -1,10 +1,17 @@
-import React from 'react'
+import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import LoadingToRedirect from './LoadingToRedirect'
+import { Navigate, Outlet } from 'react-router-dom'
 
-const PrivateRoutes = ({ children }) => {
+const PrivateRoutes = () => {
     const { status } = useSelector(state => state.authUser)
-    return status ? children : <LoadingToRedirect />
+    const [auth, setAuth] = useState({})
+    useEffect(() => {
+        const getUser = () => {
+            setAuth(status)
+        }
+        getUser()
+    }, [status])
+    return auth ? <Outlet /> : <Navigate to='/login' />
 }
 
 export default PrivateRoutes

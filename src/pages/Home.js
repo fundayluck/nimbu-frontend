@@ -8,16 +8,19 @@ const Home = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const [allAttribute, setAllAttribute] = useState(null)
-    console.log(allAttribute);
-    const { token } = useSelector(state => state.authUser)
+    const user = useSelector(state => state.authUser)
 
     useEffect(() => {
         const getUser = async () => {
-            const decode = await jwtDecode(token)
-            setAllAttribute(decode)
+            try {
+                const decode = await jwtDecode(JSON.stringify(user))
+                setAllAttribute(decode)
+            } catch (error) {
+
+            }
         }
         getUser()
-    }, [token])
+    }, [user])
 
 
     const handleLogout = () => {
@@ -29,7 +32,7 @@ const Home = () => {
 
     return (
         <>
-            <div>Home</div>
+            <div>{allAttribute?.userId}</div>
             <button onClick={() => handleLogout()} >logout</button>
         </>
     )

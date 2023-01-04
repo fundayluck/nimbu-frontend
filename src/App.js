@@ -14,11 +14,11 @@ function App() {
   }, [dispatch, user])
   return (
     <Routes>
-      <Route path="/" element={<Navigate to='/login' replace />} />
+      <Route path="/" element={<Navigate to={user ? '/home' : '/login'} />} />
       <Route path="/login" element={<Login />} />
-      <Route path="/Home" element={<PrivateRoutes>
-        <Home />
-      </PrivateRoutes>} />
+      <Route element={<PrivateRoutes />}>
+        <Route path="/home" element={<Home />} />
+      </Route>
     </Routes>
   );
 }
