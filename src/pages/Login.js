@@ -37,18 +37,19 @@ const Login = () => {
     }
 
     const clearMessage = (e) => {
+        e.preventDefault()
         setErr(false)
         setErrorMsg('')
     }
 
     return (
         <div className="flex flex-col justify-center items-center bg-Background-login bg-cover h-screen">
-            <div className='w-[75%] h-[85%] bg-white rounded-md bg-[#F1F9F9]'>
+            <div className='w-[75%] h-[85%] bg-white rounded-md bg-[#F1F9F9] shadow-md'>
                 <div className='grid grid-cols-2 gap-4 h-full'>
                     <div className='flex flex-col justify-center p-4'>
                         <div className='flex flex-col items-center'>
                             <h1 className='flex text-[38px]'>
-                                Welcome,<p className='text-[#3A5372]'>Nimboost!</p>
+                                Welcome,<span className='text-[#3A5372]'>&nbsp;Nimboost!</span>
                             </h1>
                             <h3 className='text-[18px] text-[#3A5372] mb-5'>Please, sign in with your Account</h3>
                             <form className='flex flex-col' onSubmit={doLogin}>
