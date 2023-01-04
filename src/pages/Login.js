@@ -4,10 +4,7 @@ import { ImSpinner2 } from 'react-icons/im'
 import { useLoginMutation } from '../store'
 import { useDispatch } from 'react-redux'
 import { setUser } from '../store/slices/AuthSlice'
-import LoginImage from '../assets/background/LoginImage.png'
-
-
-
+import LoginImage from '../assets/images/LoginImage.png'
 
 const Login = () => {
     const [email, setEmail] = useState('')

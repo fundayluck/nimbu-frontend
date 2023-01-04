@@ -8,7 +8,6 @@ module.exports = {
       },
       backgroundImage: {
         'Background-login': "url('../assets/images/LoginBackground.png')",
-        'Login-Image': "url('../assets/images/LoginImage.png')",
       }
     },
   },
