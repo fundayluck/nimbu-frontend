@@ -8,8 +8,6 @@ const Headbar = ({ data }) => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
-    const photo = data?.data.id_staff.photo
-
     const handleLogout = () => {
         dispatch(logout())
         navigate('/')
@@ -22,13 +20,25 @@ const Headbar = ({ data }) => {
                     <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white"></span>
                 </a>
                 <button onClick={handleLogout} data-collapse-toggle="navbar-default" type="button" className="inline-flex items-center p-2 ml-3 text-sm text-gray-500 rounded-lg " aria-controls="navbar-default" aria-expanded="false">
-                    {photo === undefined ? '' :
+                    {data?.data.id_staff === undefined && data?.data.id_staff.photo === undefined ?
                         < img
                             className='w-10 h-10 rounded outline-0'
-                            src={photo !== null ? `http://localhost:5000/${photo}` : Photo}
-                            alt={photo}
+                            src={Photo}
+                            alt='avatar'
+                        />
+                        :
+                        < img
+                            className='w-10 h-10 rounded outline-0'
+                            src={
+                                data?.data.id_staff !== null
+                                    ? `http://localhost:5000/${data?.data.id_staff.photo}`
+                                    : Photo
+                            }
+                            alt='avatar'
                         />
                     }
+
+
                 </button>
             </div>
         </nav>

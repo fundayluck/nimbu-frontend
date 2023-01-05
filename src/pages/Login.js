@@ -27,7 +27,7 @@ const Login = () => {
             setEmail('')
             setPassword('')
             setErrorMsg('')
-            navigate('/home')
+            navigate('/')
         }
     }, [isError, error, isSuccess, data, navigate, dispatch])
 
