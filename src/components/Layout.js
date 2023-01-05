@@ -4,7 +4,7 @@ import Sidebar from './Sidebar'
 import { useDispatch, useSelector } from 'react-redux'
 import axios from 'axios'
 import jwtDecode from 'jwt-decode'
-import { useNavigate } from 'react-router-dom'
+import { Outlet, useNavigate } from 'react-router-dom'
 import { logout } from '../store/slices/AuthSlice'
 
 const Layout = () => {
@@ -53,6 +53,9 @@ const Layout = () => {
         <div>
             <Headbar data={data} />
             <Sidebar />
+            <div className='ml-[300px] pt-[60px]'>
+                <Outlet />
+            </div>
         </div>
     )
 }
