@@ -6,6 +6,7 @@ import axios from 'axios'
 import jwtDecode from 'jwt-decode'
 import { Outlet, useNavigate } from 'react-router-dom'
 import { logout } from '../store/slices/AuthSlice'
+import Swal from 'sweetalert2'
 
 const Layout = () => {
     const { token } = useSelector(state => state.authUser)
@@ -25,7 +26,12 @@ const Layout = () => {
                 if (decode.exp * 1000 < Date.now()) {
                     dispatch(logout())
                     navigate('/')
-                    alert('expired token')
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'info',
+                        title: 'Your token has expired, please login again!',
+                        showConfirmButton: true,
+                    })
                 }
             } catch (error) {
                 return
