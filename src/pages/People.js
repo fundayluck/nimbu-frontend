@@ -23,12 +23,12 @@ const People = () => {
     return (
         <div>
             <h1 className='text-[26px] font-bold text-[#3A5372]'>People</h1>
-            <div className='flex justify-between mt-[33px] mr-20 ml-2 mb-4'>
+            <div className='flex justify-between mt-[33px] mr-24 ml-2 mb-4'>
                 <AiOutlineSearch className='fixed mt-2 ml-1 text-[#555770]' />
                 <input className='h-[30px] px-6 py-1 border border-[#C7C9D9] rounded' placeholder='search of people..' />
                 <Button
                     name='Add Employee'
-                    className='bg-[#F6E7E6] px-2 py-1 rounded-md tracking-wider text-[17px] text-[#3A5372] shadow '
+                    className='bg-[#F6E7E6] px-2 py-1 rounded-md tracking-wider text-[17px] text-[#3A5372] shadow hover:shadow-md '
                 />
             </div>
             <table className='w-[92%]'>
