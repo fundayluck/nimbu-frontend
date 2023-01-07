@@ -1,6 +1,45 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import { ReactComponent as Logo } from '../assets/logo/title.svg'
+import { ReactComponent as Dashboard } from '../assets/logo/Dashboard.svg'
+import { ReactComponent as Attendance } from '../assets/logo/Attendance.svg'
+import { ReactComponent as People } from '../assets/logo/People.svg'
+import { ReactComponent as RequestFor } from '../assets/logo/RequestFor.svg'
+import { ReactComponent as AccessRequest } from '../assets/logo/AccessRequest.svg'
+import { ReactComponent as Document } from '../assets/logo/Document.svg'
+
+const sidebarList = [
+    {
+        path: "/dashboard",
+        name: "Dashboard",
+        icon: <Dashboard className='m-0' />
+    },
+    {
+        path: "/attendance",
+        name: "Attendance",
+        icon: <Attendance className='m-2' />
+    },
+    {
+        path: "/people",
+        name: "People",
+        icon: <People className='m-2' />
+    },
+    {
+        path: "/request",
+        name: "Request For",
+        icon: <RequestFor className='m-2' />
+    },
+    {
+        path: "/access",
+        name: "Access Request",
+        icon: <AccessRequest className='m-2' />
+    },
+    {
+        path: "/document",
+        name: "Document",
+        icon: <Document className='m-2' />
+    },
+]
 
 const Sidebar = () => {
     return (
@@ -8,24 +47,17 @@ const Sidebar = () => {
             <div>
                 <Logo className='w-[150px] mb-5' />
             </div>
-            <NavLink to='/dashboard'>
-                Dashboard
-            </NavLink>
-            <NavLink to='/attendance'>
-                Attendance
-            </NavLink>
-            <NavLink to='/people'>
-                People
-            </NavLink>
-            <NavLink to='/request'>
-                Request for
-            </NavLink>
-            <NavLink to='/access'>
-                Access Request
-            </NavLink>
-            <NavLink to='/document'>
-                Document
-            </NavLink>
+            <ul>
+                {sidebarList.map((item, index) => (
+                    <li key={index}>
+                        <NavLink to={item.path} className={({ isActive }) => (isActive ? "bg-white flex items-center p-2 rounded-md my-2" : "flex items-center p-2 rounded-md my-2")}>
+                            {/* flex items-center p-2 rounded-md hover:bg-white */}
+                            {item.icon}
+                            <span className='text-[20px] ml-4'>{item.name}</span>
+                        </NavLink>
+                    </li>
+                ))}
+            </ul>
         </div>
     )
 }
