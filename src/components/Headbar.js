@@ -22,7 +22,7 @@ const Headbar = ({ data }) => {
     }
 
     return (
-        <nav className="bg-[#F1F9F9] border-gray-200 px-2  fixed w-full shadow">
+        <nav className="bg-[#F1F9F9] border-gray-200 px-2  fixed w-full">
             <div className="container flex flex-wrap items-center justify-between mx-auto">
                 <a href="https://flowbite.com/" className="flex items-center">
                     <img src="https://flowbite.com/docs/images/logo.svg" className="h-6 mr-3 sm:h-9" alt="" />
@@ -30,11 +30,19 @@ const Headbar = ({ data }) => {
                 </a>
                 <button onClick={handleDropdown} data-collapse-toggle="navbar-default" type="button" className="inline-flex items-center p-2 ml-3 text-sm text-gray-500 rounded-lg " aria-controls="navbar-default" aria-expanded="false">
                     {data?.data.id_staff === undefined && data?.data.id_staff.photo === undefined ?
-                        < img
-                            className='w-10 h-10 rounded outline-0'
-                            src={Photo}
-                            alt='avatar'
-                        />
+                        <>
+                            < img
+                                className='w-10 h-10 rounded outline-0'
+                                src={Photo}
+                                alt='avatar'
+                            />
+                            {
+                                isOpen ?
+                                    <BiChevronDown className='ease-out text-xl' />
+                                    :
+                                    <BiChevronLeft className='ease-out text-xl' />
+                            }
+                        </>
                         :
                         <>
                             < img

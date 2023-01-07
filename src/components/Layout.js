@@ -59,7 +59,7 @@ const Layout = () => {
         <div>
             <Headbar data={data} />
             <Sidebar />
-            <div className='ml-[300px] pt-[60px]'>
+            <div className='ml-[300px] pt-[60px] mx-4'>
                 <Outlet />
             </div>
         </div>
