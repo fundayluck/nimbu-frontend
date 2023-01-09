@@ -51,7 +51,6 @@ const Sidebar = () => {
                 {sidebarList.map((item, index) => (
                     <li key={index}>
                         <NavLink to={item.path} className={({ isActive }) => (isActive ? "bg-white flex items-center p-2 rounded-md my-2" : "flex items-center p-2 rounded-md my-2")}>
-                            {/* flex items-center p-2 rounded-md hover:bg-white */}
                             {item.icon}
                             <span className='text-[20px] ml-4'>{item.name}</span>
                         </NavLink>

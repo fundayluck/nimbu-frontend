@@ -1,17 +1,10 @@
-import { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
 import { Navigate, Outlet } from 'react-router-dom'
+import useAuth from '../ahooks/useAuth';
 
 const PrivateRoutes = () => {
-    const { status } = useSelector(state => state.authUser)
-    const [auth, setAuth] = useState({})
-    useEffect(() => {
-        const getUser = () => {
-            setAuth(status)
-        }
-        getUser()
-    }, [status])
-    return auth ? <Outlet /> : <Navigate to='/login' />
+    const { auth } = useAuth()
+
+    return auth?.status === true ? <Outlet /> : <Navigate to='/login' />
 }
 
 export default PrivateRoutes

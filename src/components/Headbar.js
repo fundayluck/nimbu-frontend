@@ -1,19 +1,21 @@
 import React, { useState } from 'react'
 import Photo from '../assets/images/photo.jpg'
-import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { BiChevronDown, BiChevronLeft } from 'react-icons/bi'
-import { logout } from '../store/slices/AuthSlice';
+import apis from '../apis';
+import useAuth from '../ahooks/useAuth';
 
 const Headbar = ({ data }) => {
+    const { setAuth } = useAuth()
     const [isOpen, setIsOpen] = useState(false)
-
     const navigate = useNavigate()
-    const dispatch = useDispatch()
 
     const handleLogout = () => {
         setIsOpen(false)
-        dispatch(logout())
+        setAuth({
+            status: false,
+            token: null
+        })
         navigate('/')
     }
 
@@ -49,7 +51,7 @@ const Headbar = ({ data }) => {
                                 className='w-10 h-10 rounded outline-0'
                                 src={
                                     data?.data.id_staff !== null
-                                        ? `http://localhost:5000/${data?.data.id_staff.photo}`
+                                        ? `${apis}/${data?.data.id_staff.photo}`
                                         : Photo
                                 }
                                 alt='avatar'

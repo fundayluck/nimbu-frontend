@@ -1,37 +1,38 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import Headbar from './Headbar'
 import Sidebar from './Sidebar'
-import { useDispatch, useSelector } from 'react-redux'
-import axios from 'axios'
-import jwtDecode from 'jwt-decode'
-import { Outlet, useNavigate } from 'react-router-dom'
-import { logout } from '../store/slices/AuthSlice'
-import Swal from 'sweetalert2'
+
+import { Outlet } from 'react-router-dom'
+import useAuth from '../ahooks/useAuth';
+import jwtDecode from 'jwt-decode';
+import Swal from 'sweetalert2';
+import apis from '../apis';
+
 
 const Layout = () => {
-    const { token } = useSelector(state => state.authUser)
-    const dispatch = useDispatch()
-    const navigate = useNavigate()
+    const { auth, setAuth } = useAuth()
     const [id, setId] = useState(null)
     const [data, setData] = useState(null)
     const getId = id?.userId
 
-
-
     useEffect(() => {
         const getUser = async () => {
             try {
-                const decode = await jwtDecode(JSON.stringify(token))
+                const decode = await jwtDecode(JSON.stringify(auth))
                 setId(decode)
                 if (decode.exp * 1000 < Date.now()) {
-                    dispatch(logout())
-                    navigate('/')
+                    localStorage.removeItem('auth')
+                    setAuth({
+                        status: false,
+                        token: null
+                    })
                     Swal.fire({
                         position: 'center',
                         icon: 'info',
                         title: 'Your token has expired, please login again!',
                         showConfirmButton: true,
                     })
+
                 }
             } catch (error) {
                 return
@@ -41,11 +42,12 @@ const Layout = () => {
         const getData = async () => {
             try {
                 if (getId === undefined) { return null }
-                const response = await axios.get(`http://localhost:5000/api/user/${getId}`, {
+                const response = await apis.get(`/api/user/${getId}`, {
                     headers: {
-                        authorization: `Bearer ${token}`
+                        authorization: `Bearer ${auth?.token}`
                     }
                 })
+                console.log(response);
                 setData(response.data)
             } catch (error) {
 
@@ -53,11 +55,13 @@ const Layout = () => {
 
         }
         getData()
-    }, [token, getId, dispatch, navigate])
+    }, [auth, setAuth, getId])
 
     return (
         <div>
-            <Headbar data={data} />
+            <Headbar
+                data={data}
+            />
             <Sidebar />
             <div className='ml-[300px] pt-[60px] mx-4'>
                 <Outlet />
