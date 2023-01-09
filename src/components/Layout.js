@@ -47,7 +47,6 @@ const Layout = () => {
                         authorization: `Bearer ${auth?.token}`
                     }
                 })
-                console.log(response);
                 setData(response.data)
             } catch (error) {
 
