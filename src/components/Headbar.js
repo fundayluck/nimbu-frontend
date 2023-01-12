@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Photo from '../assets/images/photo.jpg'
 import { useNavigate } from 'react-router-dom';
 import { BiChevronDown, BiChevronLeft } from 'react-icons/bi'
-import apis from '../apis';
+import { BaseUrl } from '../apis';
 import useAuth from '../ahooks/useAuth';
 
 const Headbar = ({ data }) => {
@@ -51,7 +51,7 @@ const Headbar = ({ data }) => {
                                 className='w-10 h-10 rounded outline-0'
                                 src={
                                     data?.data.id_staff !== null
-                                        ? `${apis}/${data?.data.id_staff.photo}`
+                                        ? `${BaseUrl}/${data?.data.id_staff.photo}`
                                         : Photo
                                 }
                                 alt='avatar'

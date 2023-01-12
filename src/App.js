@@ -8,6 +8,7 @@ import People from "./pages/People";
 import Request from "./pages/Request";
 import Access from "./pages/Access";
 import Document from "./pages/Document";
+import AddStaff from "./components/people/AddStaff";
 import useAuth from "./ahooks/useAuth";
 
 function App() {
@@ -28,12 +29,13 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/attendance" element={<Attendance />} />
           <Route path="/people" element={<People />} />
+          <Route path="/people/add-employee" element={<AddStaff />} />
           <Route path="/request" element={<Request />} />
           <Route path="/access" element={<Access />} />
           <Route path="/Document" element={<Document />} />
         </Route>
       </Route>
-    </Routes>
+    </Routes >
   );
 }
 
