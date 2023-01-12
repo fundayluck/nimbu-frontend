@@ -10,20 +10,21 @@ import Button from '../common/Button'
 const Staff = ({ show }) => {
     const { auth } = useAuth()
     const [isLoading, setIsLoading] = useState(false)
-    const [staffs, setStaffs] = useState([])
+    const [users, setUsers] = useState([])
     const [errMessage, setErrMessage] = useState([])
-    const Staffs = staffs?.data
+    const Users = users?.data
+    console.log(Users);
 
     useEffect(() => {
         const getAllUser = async () => {
             try {
                 setIsLoading(true)
-                const response = await apis.get('/api/staff', {
+                const response = await apis.get('/api/user', {
                     headers: {
                         authorization: `Bearer ${auth.token}`
                     }
                 })
-                setStaffs(response.data)
+                setUsers(response.data)
                 setIsLoading(false)
             } catch (error) {
                 setIsLoading(false)
@@ -44,28 +45,26 @@ const Staff = ({ show }) => {
             </Fragment>
         </tbody>
     } else if
-        (staffs.status === true) {
+        (users.status === true) {
         content =
-            Staffs ? Staffs.map((user, key) => (
-
-                <tbody key={key}>
+            Users ? Users.map((user, key) => (
+                <tbody key={key} >
                     <Fragment>
                         < tr className='bg-white hover:shadow-xl cursor-pointer'>
                             <td className='px-5 rounded-l-lg'>
                                 < img
                                     className='w-10 h-10 rounded-md border-2 border-[#3A5372]'
-                                    src={`http://localhost:5000/${user.photo}`}
+                                    src={`http://localhost:5000/${user?.id_staff?.photo}`}
                                     alt='avatar'
                                 />
                             </td>
                             <td className='p-4 h-[73px] text-[#3A5372] tracking-wide text-[17px] font-bold'>
-                                {user.name}
+                                {user?.id_staff?.name}
                             </td>
-                            <td className='p-4 h-[73px] text-[#3A5372] tracking-wide text-[17px]'>{user.id_division.name}</td>
-                            <td className='p-4  h-[73px] text-[#3A5372] tracking-wide text-[17px]'>{user.phone}</td>
-                            <td className='p-4   h-[73px]text-[#3A5372] tracking-wide text-[17px]'>{user.area}</td>
+                            <td className='p-4 h-[73px] text-[#3A5372] tracking-wide text-[17px]'>{user?.role}</td>
+                            <td className='p-4 h-[73px] text-[#3A5372] tracking-wide text-[17px]'>{user?.id_staff?.phone}</td>
+                            <td className='p-4 h-[73px]text-[#3A5372] tracking-wide text-[17px]'>{user?.id_staff?.area}</td>
                             <td className='text-[17px] rounded-r-lg'><HiDotsVertical /></td>
-
                         </tr>
                         <tr className='bg-[#F1F9F9] h-2'></tr>
                     </Fragment>
@@ -99,7 +98,7 @@ const Staff = ({ show }) => {
                     <tr>
                         <td className=''></td>
                         <td className='text-[22px] text-[#C2A3A1] p-4'>Employee</td>
-                        <td className='text-[22px] text-[#C2A3A1] p-4'>Position</td>
+                        <td className='text-[22px] text-[#C2A3A1] p-4'>Role</td>
                         <td className='text-[22px] text-[#C2A3A1] p-4'>Phone </td>
                         <td className='text-[22px] text-[#C2A3A1] p-4'>Area</td>
                     </tr>
