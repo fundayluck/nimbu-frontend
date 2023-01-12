@@ -1,10 +1,9 @@
-import React, { Fragment, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { ImSpinner2 } from 'react-icons/im'
 import useAuth from '../../ahooks/useAuth'
 import apis from '../../apis'
-import { HiDotsVertical } from 'react-icons/hi'
 import { AiOutlineSearch } from 'react-icons/ai'
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import Button from '../common/Button'
 
 const Staff = ({ show }) => {
@@ -13,7 +12,6 @@ const Staff = ({ show }) => {
     const [users, setUsers] = useState([])
     const [errMessage, setErrMessage] = useState([])
     const Users = users?.data
-    console.log(Users);
 
     useEffect(() => {
         const getAllUser = async () => {
@@ -37,49 +35,47 @@ const Staff = ({ show }) => {
     let content
 
     if (isLoading) {
-        content = <tbody>
-            <Fragment>
-                <tr className='fixed bg-white hover:shadow-xl cursor-pointer rounded-md  w-[69%]'>
-                    <td className='p-4 h-[73px] text-[#3A5372] tracking-wide flex justify-center text-[17px]'><ImSpinner2 className='animate-spin' /></td>
-                </tr>
-            </Fragment>
-        </tbody>
+        content =
+            <div className='fixed bg-white hover:shadow-xl cursor-pointer rounded-md  w-[69%]'>
+                <div className='p-4 h-[73px] text-[#3A5372]  flex justify-center text-[17px]'><ImSpinner2 className='animate-spin' /></div>
+            </div>
+
     } else if
         (users.status === true) {
         content =
-            Users ? Users.map((user, key) => (
-                <tbody key={key} >
-                    <Fragment>
-                        < tr className='bg-white hover:shadow-xl cursor-pointer'>
-                            <td className='px-5 rounded-l-lg'>
-                                < img
-                                    className='w-10 h-10 rounded-md border-2 border-[#3A5372]'
-                                    src={`http://localhost:5000/${user?.id_staff?.photo}`}
-                                    alt='avatar'
-                                />
-                            </td>
-                            <td className='p-4 h-[73px] text-[#3A5372] tracking-wide text-[17px] font-bold'>
-                                {user?.id_staff?.name}
-                            </td>
-                            <td className='p-4 h-[73px] text-[#3A5372] tracking-wide text-[17px]'>{user?.role}</td>
-                            <td className='p-4 h-[73px] text-[#3A5372] tracking-wide text-[17px]'>{user?.id_staff?.phone}</td>
-                            <td className='p-4 h-[73px]text-[#3A5372] tracking-wide text-[17px]'>{user?.id_staff?.area}</td>
-                            <td className='text-[17px] rounded-r-lg'><HiDotsVertical /></td>
-                        </tr>
-                        <tr className='bg-[#F1F9F9] h-2'></tr>
-                    </Fragment>
-                </tbody >
+            Users ? Users.map((user) => (
+                <NavLink to={`${user._id}`} key={user._id}>
+                    <div className='grid grid-cols-5 bg-white cursor-pointer rounded-md mb-2'>
+                        <div className='flex flex-col justify-center items-center mx-[20px]'>
+                            < img
+                                className='w-[50px] h-[50px] rounded-md border-2 border-[#3A5372]'
+                                src={`http://localhost:5000/${user?.id_staff?.photo}`}
+                                alt='avatar'
+                            />
+                        </div>
+                        <div className='flex justify-center flex-col items-center h-[73px] text-[#3A5372] text-[17px] font-bold'>
+                            {user?.email}
+                        </div>
+                        <div className='flex justify-center flex-col items-center h-[73px] text-[#3A5372] text-[17px]'>
+                            {user?.id_staff?._id}
+                        </div>
+                        <div className='flex justify-center flex-col items-center h-[73px] text-[#3A5372] text-[17px]'>
+                            {user?.role}
+                        </div>
+                        <div className='flex justify-center flex-col items-center h-[73px]text-[#3A5372] text-[17px]'>
+                            {user?.id_staff?.area}
+                        </div>
+                    </div>
+                </NavLink>
 
             )
             ) : []
     } else if (errMessage.status === false) {
-        content = <tbody>
-            <Fragment>
-                <tr className='fixed bg-white hover:shadow-xl cursor-pointer rounded-md  w-[69%]'>
-                    <td className='p-4 h-[73px] text-[#3A5372] tracking-wide flex justify-center text-[17px]'>{errMessage.data}</td>
-                </tr>
-            </Fragment>
-        </tbody>
+        content =
+            <div className='fixed bg-white hover:shadow-xl cursor-pointer rounded-md  w-[69%]'>
+                <div className='p-4 h-[73px] text-[#3A5372] flex justify-center text-[17px]'>{errMessage.data}</div>
+            </div>
+
     }
     return (
         <div className={`${show ? '' : 'hidden'}`}>
@@ -93,18 +89,18 @@ const Staff = ({ show }) => {
                     />
                 </Link>
             </div>
-            <table className='w-[92%]'>
-                <thead>
-                    <tr>
-                        <td className=''></td>
-                        <td className='text-[22px] text-[#C2A3A1] p-4'>Employee</td>
-                        <td className='text-[22px] text-[#C2A3A1] p-4'>Role</td>
-                        <td className='text-[22px] text-[#C2A3A1] p-4'>Phone </td>
-                        <td className='text-[22px] text-[#C2A3A1] p-4'>Area</td>
-                    </tr>
-                </thead>
+            <div className='w-[92%]'>
+                <div className='grid grid-cols-5'>
+                    <div className=''></div>
+                    <div className='flex justify-center text-[22px] text-[#C2A3A1]'>Email</div>
+                    <div className='flex justify-center text-[22px] text-[#C2A3A1] '>NIP</div>
+                    <div className='flex justify-center text-[22px] text-[#C2A3A1] '>Role</div>
+                    <div className='flex justify-center text-[22px] text-[#C2A3A1] '>Status</div>
+                </div>
+            </div>
+            <div className='w-[92%]' >
                 {content}
-            </table>
+            </div>
         </div>
     )
 }

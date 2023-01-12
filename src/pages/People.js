@@ -8,8 +8,6 @@ const People = () => {
     const [showUsers, setshowUsers] = useState(false)
     const [isShowUsers, setIsShowUsers] = useState(false)
 
-    console.log(isShowStaff);
-
     const handleStaff = () => {
         !showStaff ?
             setShowStaff(true)
@@ -42,14 +40,14 @@ const People = () => {
                             onClick={handleStaff}
                             disabled={isShowStaff}
                         >
-                            Staff
+                            Users
                         </button>
                         <button
                             className={`mx-2 ${isShowUsers ? 'underline' : ''}`}
                             onClick={handleUsers}
                             disabled={isShowUsers}
                         >
-                            Users
+                            Staff
                         </button>
                     </div>
                 </div>
