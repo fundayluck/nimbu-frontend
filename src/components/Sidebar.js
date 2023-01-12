@@ -6,7 +6,6 @@ import { ReactComponent as Attendance } from '../assets/logo/Attendance.svg'
 import { ReactComponent as People } from '../assets/logo/People.svg'
 import { ReactComponent as RequestFor } from '../assets/logo/RequestFor.svg'
 import { ReactComponent as AccessRequest } from '../assets/logo/AccessRequest.svg'
-import { ReactComponent as Document } from '../assets/logo/Document.svg'
 
 const sidebarList = [
     {
@@ -33,12 +32,7 @@ const sidebarList = [
         path: "/access",
         name: "Access Request",
         icon: <AccessRequest className='m-2' />
-    },
-    {
-        path: "/document",
-        name: "Document",
-        icon: <Document className='m-2' />
-    },
+    }
 ]
 
 const Sidebar = () => {
