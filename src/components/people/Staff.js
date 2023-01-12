@@ -1,11 +1,11 @@
 import React, { Fragment, useEffect, useState } from 'react'
 import { ImSpinner2 } from 'react-icons/im'
-import useAuth from '../ahooks/useAuth'
-import apis from '../apis'
+import useAuth from '../../ahooks/useAuth'
+import apis from '../../apis'
 import { HiDotsVertical } from 'react-icons/hi'
 import { AiOutlineSearch } from 'react-icons/ai'
 import { Link } from 'react-router-dom'
-import Button from '../components/common/Button'
+import Button from '../common/Button'
 
 const Staff = ({ show }) => {
     const { auth } = useAuth()

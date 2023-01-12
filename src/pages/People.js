@@ -1,6 +1,6 @@
 import { Fragment, useState } from 'react'
-import Staff from './Staff'
-import Users from './Users'
+import Staff from '../components/people/Staff'
+import Users from '../components/people/Users'
 
 const People = () => {
     const [showStaff, setShowStaff] = useState(true)
