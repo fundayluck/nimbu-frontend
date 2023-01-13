@@ -9,6 +9,7 @@ import Request from "./pages/Request";
 import Access from "./pages/Access";
 import AddStaff from "./components/people/AddStaff";
 import useAuth from "./ahooks/useAuth";
+import ListNipWithoutAccount from "./components/people/ListNipWithoutAccount";
 import AddUser from "./components/people/AddUser";
 
 function App() {
@@ -29,7 +30,8 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/attendance" element={<Attendance />} />
           <Route path="/people" element={<People />} />
-          <Route path="/people/add-user" element={<AddUser />} />
+          <Route path="/people/list-nip" element={<ListNipWithoutAccount />} />
+          <Route path="/people/list-nip/create/:id" element={<AddUser />} />
           <Route path="/people/add-employee" element={<AddStaff />} />
           <Route path="/request" element={<Request />} />
           <Route path="/access" element={<Access />} />
