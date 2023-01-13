@@ -5,6 +5,7 @@ import apis, { BaseUrl } from '../../apis'
 import { AiOutlineSearch } from 'react-icons/ai'
 import { Link, NavLink } from 'react-router-dom'
 import Button from '../common/Button'
+import StatusCard from '../common/StatusCard'
 
 const Staff = ({ show }) => {
     const { auth } = useAuth()
@@ -63,7 +64,7 @@ const Staff = ({ show }) => {
                             {user?.role}
                         </div>
                         <div className='flex justify-center flex-col items-center h-[73px]text-[#3A5372] text-[17px]'>
-                            {user?.id_staff?.area}
+                            <StatusCard status={user?.is_active} />
                         </div>
                     </div>
                 </NavLink>
