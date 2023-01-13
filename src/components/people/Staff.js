@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { ImSpinner2 } from 'react-icons/im'
 import useAuth from '../../ahooks/useAuth'
-import apis from '../../apis'
+import apis, { BaseUrl } from '../../apis'
 import { AiOutlineSearch } from 'react-icons/ai'
 import { Link, NavLink } from 'react-router-dom'
 import Button from '../common/Button'
@@ -49,7 +49,7 @@ const Staff = ({ show }) => {
                         <div className='flex flex-col justify-center items-center mx-[20px]'>
                             < img
                                 className='w-[50px] h-[50px] rounded-md border-2 border-[#3A5372]'
-                                src={`http://localhost:5000/${user?.id_staff?.photo}`}
+                                src={`${BaseUrl}/${user?.id_staff?.photo}`}
                                 alt='avatar'
                             />
                         </div>

@@ -1,7 +1,7 @@
 import axios from "axios"
 
 export default axios.create({
-    baseURL: 'http://localhost:5000',
+    baseURL: 'https://backend-nimbu.cyclic.app',
 })
 
-export const BaseUrl = 'http://localhost:5000'
+export const BaseUrl = 'https://backend-nimbu.cyclic.app'
