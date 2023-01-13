@@ -50,7 +50,7 @@ const Users = ({ show }) => {
                         <div className='flex flex-col justify-center items-center mx-[20px]'>
                             < img
                                 className='w-[50px] h-[50px] rounded-md border-2 border-[#3A5372]'
-                                src={`${BaseUrl}//${user.photo}`}
+                                src={`${BaseUrl}/${user.photo}`}
                                 alt='avatar'
                             />
                         </div>
