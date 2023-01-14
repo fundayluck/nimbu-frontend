@@ -1,7 +1,6 @@
 
 
 const StatusCard = ({ status }) => {
-    console.log(status);
     let Content
 
     if (status === 1) {

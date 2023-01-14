@@ -46,12 +46,23 @@ const AddUser = () => {
             }
         }
         getUser()
-    }, [auth, id])
+
+    }, [auth, id, password, confirmPass])
 
     const handleCreate = async (e) => {
         e.preventDefault()
         try {
             setIsLoading(true)
+            if (confirmPass !== password) {
+                Swal.fire({
+                    position: 'center',
+                    icon: 'warning',
+                    title: 'password and confirm password not same!',
+                    showConfirmButton: true,
+                })
+                setIsLoading(false)
+                return
+            }
             const response = await apis('/api/create-user', {
                 headers: {
                     authorization: `Bearer ${auth.token}`
@@ -64,6 +75,7 @@ const AddUser = () => {
                     id_staff: nip
                 }
             })
+
             if (response?.data?.status === true) {
                 Swal.fire({
                     position: 'center',
