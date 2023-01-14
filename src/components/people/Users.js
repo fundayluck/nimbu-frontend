@@ -10,9 +10,16 @@ import Button from '../common/Button'
 const Users = ({ show }) => {
     const { auth } = useAuth()
     const [isLoading, setIsLoading] = useState(false)
+    const [title, setTitle] = useState('')
     const [staffs, setStaffs] = useState([])
     const [errMessage, setErrMessage] = useState([])
     const Staffs = staffs?.data
+
+    const filteredStaff = Staffs
+        ? Staffs.filter(
+            (staff) => (staff.name && staff.name.toLowerCase().includes(title.toLowerCase()))
+        ) : []
+    console.log(filteredStaff);
 
     useEffect(() => {
         const getAllUser = async () => {
@@ -44,7 +51,7 @@ const Users = ({ show }) => {
     } else if
         (staffs.status === true) {
         content =
-            Staffs ? Staffs.map((user) => (
+            filteredStaff ? filteredStaff.map((user) => (
                 <NavLink to={`${user._id}`} key={user._id} >
                     <div className='grid grid-cols-5 bg-white cursor-pointer rounded-md mb-2 hover:shadow-md' >
                         <div className='flex flex-col justify-center items-center mx-[20px]'>
@@ -76,7 +83,12 @@ const Users = ({ show }) => {
         <div className={`${show ? '' : 'hidden'}`}>
             <div className='flex justify-between mt-[33px] mr-24 ml-2 mb-4'>
                 <AiOutlineSearch className='fixed mt-2 ml-1 text-[#555770]' />
-                <input className='h-[30px] px-6 py-1 border border-[#C7C9D9] rounded' placeholder='search of people..' />
+                <input
+                    className='h-[30px] px-6 py-1 border border-[#C7C9D9] rounded'
+                    placeholder='search of people..'
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
+                />
                 <Link to='list-nip'>
                     <Button
                         name='Create Account'
