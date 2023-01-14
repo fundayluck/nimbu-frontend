@@ -45,8 +45,8 @@ const Users = ({ show }) => {
         (staffs.status === true) {
         content =
             Staffs ? Staffs.map((user) => (
-                <NavLink to={`${user._id}`} key={user._id}>
-                    <div className='grid grid-cols-5 bg-white cursor-pointer rounded-md mb-2' >
+                <NavLink to={`${user._id}`} key={user._id} >
+                    <div className='grid grid-cols-5 bg-white cursor-pointer rounded-md mb-2 hover:shadow-md' >
                         <div className='flex flex-col justify-center items-center mx-[20px]'>
                             < img
                                 className='w-[50px] h-[50px] rounded-md border-2 border-[#3A5372]'

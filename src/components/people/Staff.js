@@ -3,7 +3,7 @@ import { ImSpinner2 } from 'react-icons/im'
 import useAuth from '../../ahooks/useAuth'
 import apis, { BaseUrl } from '../../apis'
 import { AiOutlineSearch } from 'react-icons/ai'
-import { Link, NavLink } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import Button from '../common/Button'
 import StatusCard from '../common/StatusCard'
 
@@ -45,30 +45,27 @@ const Staff = ({ show }) => {
         (users.status === true) {
         content =
             Users ? Users.map((user) => (
-                <NavLink to={`${user._id}`} key={user._id}>
-                    <div className='grid grid-cols-5 bg-white cursor-pointer rounded-md mb-2'>
-                        <div className='flex flex-col justify-center items-center mx-[20px]'>
-                            < img
-                                className='w-[50px] h-[50px] rounded-md border-2 border-[#3A5372]'
-                                src={`${BaseUrl}/${user?.id_staff?.photo}`}
-                                alt='avatar'
-                            />
-                        </div>
-                        <div className='flex justify-center flex-col items-center h-[73px] text-[#3A5372] text-[17px] font-bold'>
-                            {user?.email}
-                        </div>
-                        <div className='flex justify-center flex-col items-center h-[73px] text-[#3A5372] text-[17px]'>
-                            {user?.id_staff?._id}
-                        </div>
-                        <div className='flex justify-center flex-col items-center h-[73px] text-[#3A5372] text-[17px]'>
-                            {user?.role}
-                        </div>
-                        <div className='flex justify-center flex-col items-center h-[73px]text-[#3A5372] text-[17px]'>
-                            <StatusCard status={user?.is_active} />
-                        </div>
+                <div className='grid grid-cols-5 bg-white rounded-md mb-2' key={user._id}>
+                    <div className='flex flex-col justify-center items-center mx-[20px]'>
+                        < img
+                            className='w-[50px] h-[50px] rounded-md border-2 border-[#3A5372]'
+                            src={`${BaseUrl}/${user?.id_staff?.photo}`}
+                            alt='avatar'
+                        />
                     </div>
-                </NavLink>
-
+                    <div className='flex justify-center flex-col items-center h-[73px] text-[#3A5372] text-[17px] font-bold'>
+                        {user?.email}
+                    </div>
+                    <div className='flex justify-center flex-col items-center h-[73px] text-[#3A5372] text-[17px]'>
+                        {user?.id_staff?._id}
+                    </div>
+                    <div className='flex justify-center flex-col items-center h-[73px] text-[#3A5372] text-[17px]'>
+                        {user?.role}
+                    </div>
+                    <div className='flex justify-center flex-col items-center h-[73px]text-[#3A5372] text-[17px]'>
+                        <StatusCard status={user?.is_active} />
+                    </div>
+                </div>
             )
             ) : []
     } else if (errMessage.status === false) {
