@@ -19,7 +19,6 @@ const Users = ({ show }) => {
         ? Staffs.filter(
             (staff) => (staff.name && staff.name.toLowerCase().includes(title.toLowerCase()))
         ) : []
-    console.log(filteredStaff);
 
     useEffect(() => {
         const getAllUser = async () => {

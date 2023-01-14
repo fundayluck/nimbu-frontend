@@ -9,10 +9,16 @@ import StatusCard from '../common/StatusCard'
 
 const Staff = ({ show }) => {
     const { auth } = useAuth()
+    const [title, setTitle] = useState('')
     const [isLoading, setIsLoading] = useState(false)
     const [users, setUsers] = useState([])
     const [errMessage, setErrMessage] = useState([])
     const Users = users?.data
+
+    const filteredStaff = Users
+        ? Users.filter(
+            (staff) => (staff.email && staff.email.toLowerCase().includes(title.toLowerCase()))
+        ) : []
 
     useEffect(() => {
         const getAllUser = async () => {
@@ -44,7 +50,7 @@ const Staff = ({ show }) => {
     } else if
         (users.status === true) {
         content =
-            Users ? Users.map((user) => (
+            filteredStaff ? filteredStaff.map((user) => (
                 <div className='grid grid-cols-5 bg-white rounded-md mb-2' key={user._id}>
                     <div className='flex flex-col justify-center items-center mx-[20px]'>
                         < img
@@ -79,7 +85,12 @@ const Staff = ({ show }) => {
         <div className={`${show ? '' : 'hidden'}`}>
             <div className='flex justify-between mt-[33px] mr-24 ml-2 mb-4'>
                 <AiOutlineSearch className='fixed mt-2 ml-1 text-[#555770]' />
-                <input className='h-[30px] px-6 py-1 border border-[#C7C9D9] rounded' placeholder='search of people..' />
+                <input
+                    className='h-[30px] px-6 py-1 border border-[#C7C9D9] rounded'
+                    placeholder='search of people..'
+                    onChange={(e) => setTitle(e.target.value)}
+                    value={title}
+                />
                 <Link to='add-employee'>
                     <Button
                         name='Add Employee'
