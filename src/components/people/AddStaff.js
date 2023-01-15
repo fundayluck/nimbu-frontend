@@ -195,12 +195,17 @@ const AddStaff = ({ edit }) => {
                                 < input id='files' type='file' disabled={edit} className='hidden' onChange={handleImage} />
                             </>
                             :
-                            <img
-                                src={edit ? Photo : preview}
-                                onClick={edit ? AlertEditPhoto : null}
-                                alt=''
-                                className={`ml-5 w-[150px] h-[150px] rounded ${edit ? 'cursor-pointer' : ''}`}
-                            />
+                            <>
+                                <label htmlFor='files' >
+                                    <img
+                                        src={edit ? Photo : preview}
+                                        onClick={edit ? AlertEditPhoto : null}
+                                        alt=''
+                                        className={`ml-5 w-[150px] h-[150px] rounded cursor-pointer`}
+                                    />
+                                </label>
+                                < input id='files' type='file' disabled={edit} className='hidden' onChange={handleImage} />
+                            </>
                         }
                     </div>
                     <div className='col-span-2 flex flex-col gap-1'>
