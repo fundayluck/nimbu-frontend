@@ -43,8 +43,9 @@ const DetailStaff = () => {
                     }
                 </div>
                 <div className='flex flex-col'>
-                    <Button name='Edit Employee' className='bg-[#F6E7E6] h-[40px] px-2 py-1 rounded-md tracking-wider text-[17px] text-[#3A5372] shadow hover:shadow-md mr-2 mb-2' />
-                    <Button name='Edit Employee' className='bg-[#F6E7E6] h-[40px] px-2 py-1 rounded-md tracking-wider text-[17px] text-[#3A5372] shadow hover:shadow-md mr-2 mb-2' />
+                    <Button name='Edit Employee' className='bg-[#F6E7E6] h-[40px] px-2 py-1 rounded-md tracking-wider text-[17px] text-[#3A5372] shadow hover:shadow-md  mb-2' />
+                    {/* <Button name='Edit Employee' className='bg-[#F6E7E6] h-[40px] px-2 py-1 rounded-md tracking-wider text-[17px] text-[#3A5372] shadow hover:shadow-md mr-2 mb-2' /> */}
+                    <div className={`${Staff.is_deleted === '0' ? "bg-[#3A5372] text-white" : "bg-[#E6F3E5]"} flex justify-center rounded px-2 py-1`}>{Staff.is_deleted === '0' ? "Active" : "Non-Active"}</div>
                 </div>
 
             </div>

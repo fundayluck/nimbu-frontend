@@ -11,7 +11,7 @@ const StatusCard = ({ status }) => {
     }
 
     return (
-        <div className='bg-[#E6F3E5] flex justify-center rounded px-2'>
+        <div className={`${status ? "bg-[#3A5372] text-white" : "bg-[#E6F3E5]"} flex justify-center rounded px-2`}>
             {Content}
         </div>
     )
