@@ -5,6 +5,7 @@ import apis from '../../apis';
 import useAuth from '../../ahooks/useAuth'
 import Photo from '../../assets/images/photo.jpg'
 import Swal from 'sweetalert2';
+import moment from 'moment';
 
 const AddStaff = ({ edit }) => {
     const { auth } = useAuth()
@@ -49,6 +50,7 @@ const AddStaff = ({ edit }) => {
                 setAddress(response.data.data.address)
                 setNIK(response.data.data.NIK)
                 setGender(response.data.data.gender)
+                setBirth(moment(response.data.data.birth).format('YYYY-MM-DD'))
                 setImage(response.data.data.photo)
             }
         }
