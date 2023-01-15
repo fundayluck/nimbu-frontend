@@ -4,10 +4,10 @@ const StatusCard = ({ status }) => {
     let Content
 
     if (status === 1) {
-        Content = 'active'
+        Content = 'Active'
     }
     if (status === 0) {
-        Content = 'non Active'
+        Content = 'Non-Active'
     }
 
     return (
