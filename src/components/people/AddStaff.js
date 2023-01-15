@@ -6,11 +6,10 @@ import useAuth from '../../ahooks/useAuth'
 import Photo from '../../assets/images/photo.jpg'
 import Swal from 'sweetalert2';
 import moment from 'moment';
+import { ImSpinner2 } from 'react-icons/im';
 
 const AddStaff = ({ edit }) => {
     const { auth } = useAuth()
-    // const [dataFetch, setDataFetch] = useState([])
-    // console.log(dataFetch);
     const [nip, setNip] = useState('')
     const [name, setName] = useState('')
     const [position, setPosition] = useState('')
@@ -22,6 +21,7 @@ const AddStaff = ({ edit }) => {
     const [area, setArea] = useState('')
     const [image, setImage] = useState(null)
     const [preview, setPreview] = useState(null)
+    const [isLoading, setIsLoading] = useState(false)
     const { id } = useParams()
 
     const navigate = useNavigate()
@@ -41,7 +41,6 @@ const AddStaff = ({ edit }) => {
                         Authorization: `Bearer ${auth?.token}`,
                     },
                 })
-                console.log(response.data.data);
                 setNip(response.data.data._id)
                 setPosition(response.data.data.id_division._id)
                 setName(response.data.data.name)
@@ -60,6 +59,7 @@ const AddStaff = ({ edit }) => {
     const createStaff = async (e) => {
         e.preventDefault()
         try {
+            setIsLoading(true)
             const formData = new FormData();
             formData.append("_id", nip);
             formData.append("id_division", position);
@@ -72,6 +72,7 @@ const AddStaff = ({ edit }) => {
             formData.append("NIK", NIK);
             formData.append("image", image);
             if (image === null) {
+                setIsLoading(false)
                 return Swal.fire({
                     position: 'center',
                     icon: 'warning',
@@ -79,6 +80,7 @@ const AddStaff = ({ edit }) => {
                     showConfirmButton: true,
                 })
             } else if (position === '') {
+                setIsLoading(false)
                 return Swal.fire({
                     position: 'center',
                     icon: 'warning',
@@ -86,6 +88,7 @@ const AddStaff = ({ edit }) => {
                     showConfirmButton: true,
                 })
             } else if (birth === '') {
+                setIsLoading(false)
                 return Swal.fire({
                     position: 'center',
                     icon: 'warning',
@@ -103,16 +106,57 @@ const AddStaff = ({ edit }) => {
                 }
             );
             if (response.data.status === true) {
+                setIsLoading(false)
                 navigate('/people')
                 Swal.fire({
                     position: 'center',
-                    icon: 'war',
+                    icon: 'success',
                     title: 'Create Staff Success!',
                     showConfirmButton: true,
                 })
             }
 
         } catch (error) {
+            setIsLoading(false)
+            return Swal.fire({
+                position: 'center',
+                icon: 'warning',
+                title: error.response.data.message,
+                showConfirmButton: true,
+            })
+        }
+    }
+
+    const EditStaff = async (e) => {
+        e.preventDefault()
+        try {
+            setIsLoading(true)
+            await apis(`api/staff/${id}/edit`, {
+                headers: {
+                    Authorization: `Bearer ${auth?.token}`,
+                },
+                method: "PUT",
+                data: {
+                    name,
+                    id_division: position,
+                    phone,
+                    birth,
+                    address,
+                    NIK,
+                    gender,
+                    area
+                }
+            })
+            setIsLoading(false)
+            navigate('/people')
+            Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: 'Edited Staff Success!',
+                showConfirmButton: true,
+            })
+        } catch (error) {
+            setIsLoading(false)
             return Swal.fire({
                 position: 'center',
                 icon: 'warning',
@@ -140,7 +184,7 @@ const AddStaff = ({ edit }) => {
     return (
         <div>
             <h1 className='text-[26px] font-bold text-[#3A5372]'>{edit ? "Edit Employee" : "Add Employee"}</h1>
-            <form onSubmit={createStaff}>
+            <form onSubmit={edit ? EditStaff : createStaff}>
                 <div className='grid grid-rows-2 grid-flow-col'>
                     <div className='row-span-2'>
                         {image === null ?
@@ -153,7 +197,7 @@ const AddStaff = ({ edit }) => {
                             :
                             <img
                                 src={edit ? Photo : preview}
-                                onClick={edit ? AlertEditPhoto : ''}
+                                onClick={edit ? AlertEditPhoto : null}
                                 alt=''
                                 className={`ml-5 w-[150px] h-[150px] rounded ${edit ? 'cursor-pointer' : ''}`}
                             />
@@ -265,7 +309,10 @@ const AddStaff = ({ edit }) => {
                     </div>
                     <div className='flex justify-start mt-10'>
                         <Button
-                            name={edit ? 'Edit' : 'Create'}
+                            name={
+                                isLoading ? <ImSpinner2 className='animate-spin' /> :
+                                    edit ? 'Edit' : 'Create'
+                            }
                             type='submit'
                             className='bg-[#F6E7E6] h-[40px] px-2 py-1 rounded-md tracking-wider text-[17px] text-[#3A5372] shadow hover:shadow-md mr-2'
                         />
