@@ -1,13 +1,15 @@
-import { useState } from 'react'
-import { NavLink, useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react'
+import { NavLink, useNavigate, useParams } from 'react-router-dom';
 import Button from '../common/Button'
 import apis from '../../apis';
 import useAuth from '../../ahooks/useAuth'
 import Photo from '../../assets/images/photo.jpg'
 import Swal from 'sweetalert2';
 
-const AddStaff = () => {
+const AddStaff = ({ edit }) => {
     const { auth } = useAuth()
+    // const [dataFetch, setDataFetch] = useState([])
+    // console.log(dataFetch);
     const [nip, setNip] = useState('')
     const [name, setName] = useState('')
     const [position, setPosition] = useState('')
@@ -19,6 +21,7 @@ const AddStaff = () => {
     const [area, setArea] = useState('')
     const [image, setImage] = useState(null)
     const [preview, setPreview] = useState(null)
+    const { id } = useParams()
 
     const navigate = useNavigate()
 
@@ -29,9 +32,31 @@ const AddStaff = () => {
         setGender('Perempuan')
     }
 
+    useEffect(() => {
+        const fetch = async (e) => {
+            if (edit) {
+                const response = await apis.get(`/api/staff/${id}`, {
+                    headers: {
+                        Authorization: `Bearer ${auth?.token}`,
+                    },
+                })
+                console.log(response.data.data);
+                setNip(response.data.data._id)
+                setPosition(response.data.data.id_division._id)
+                setName(response.data.data.name)
+                setPhone(response.data.data.phone)
+                setArea(response.data.data.area)
+                setAddress(response.data.data.address)
+                setNIK(response.data.data.NIK)
+                setGender(response.data.data.gender)
+                setImage(response.data.data.photo)
+            }
+        }
+        fetch()
+    }, [id, auth, edit])
+
     const createStaff = async (e) => {
         e.preventDefault()
-
         try {
             const formData = new FormData();
             formData.append("_id", nip);
@@ -101,9 +126,18 @@ const AddStaff = () => {
         setPreview(URL.createObjectURL(e.target.files[0]))
     }
 
+    const AlertEditPhoto = () => {
+        Swal.fire({
+            position: 'center',
+            icon: 'warning',
+            title: 'You are not allowed to update photo',
+            showConfirmButton: true,
+        })
+    }
+
     return (
         <div>
-            <h1 className='text-[26px] font-bold text-[#3A5372]'>Add Employee</h1>
+            <h1 className='text-[26px] font-bold text-[#3A5372]'>{edit ? "Edit Employee" : "Add Employee"}</h1>
             <form onSubmit={createStaff}>
                 <div className='grid grid-rows-2 grid-flow-col'>
                     <div className='row-span-2'>
@@ -112,12 +146,11 @@ const AddStaff = () => {
                                 <label htmlFor='files' >
                                     <img src={Photo} alt='' className='ml-5 w-[150px] h-[150px] border-2 border-dotted cursor-pointer rounded' />
                                 </label>
-                                < input id='files' type='file' className='hidden' onChange={handleImage} />
+                                < input id='files' type='file' disabled={edit} className='hidden' onChange={handleImage} />
                             </>
                             :
-                            <img src={preview} alt='' className='ml-5 w-[150px] h-[150px] rounded' />
+                            <img src={edit ? Photo : preview} onClick={edit ? AlertEditPhoto : ''} alt='' className='ml-5 w-[150px] h-[150px] rounded' />
                         }
-
                     </div>
                     <div className='col-span-2 flex flex-col gap-1'>
                         <label className='text-[18px] text-[#3A5372] font-bold pl-1'>NIP</label>
@@ -125,6 +158,7 @@ const AddStaff = () => {
                             className='bg-[#F1F9F9] border-b-2 w-[320px] px-2 my-2 outline-0 leading-loose'
                             placeholder='NIP'
                             required
+                            disabled={edit}
                             value={nip}
                             onChange={(e) => setNip(e.target.value)}
                         />
@@ -224,7 +258,7 @@ const AddStaff = () => {
                     </div>
                     <div className='flex justify-start mt-10'>
                         <Button
-                            name='Create'
+                            name={edit ? 'Edit' : 'Create'}
                             type='submit'
                             className='bg-[#F6E7E6] h-[40px] px-2 py-1 rounded-md tracking-wider text-[17px] text-[#3A5372] shadow hover:shadow-md mr-2'
                         />

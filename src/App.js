@@ -12,6 +12,7 @@ import useAuth from "./ahooks/useAuth";
 import ListNipWithoutAccount from "./components/people/ListNipWithoutAccount";
 import AddUser from "./components/people/AddUser";
 import DetailStaff from "./components/people/DetailStaff";
+import EditStaff from "./components/people/EditStaff";
 
 function App() {
   const { auth } = useAuth();
@@ -32,6 +33,7 @@ function App() {
           <Route path="/attendance" element={<Attendance />} />
           <Route path="/people" element={<People />} />
           <Route path="/people/:id" element={<DetailStaff />} />
+          <Route path="/people/:id/edit" element={<EditStaff />} />
           <Route path="/people/list-nip" element={<ListNipWithoutAccount />} />
           <Route path="/people/list-nip/create/:id" element={<AddUser />} />
           <Route path="/people/add-employee" element={<AddStaff />} />
