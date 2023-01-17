@@ -1,17 +1,19 @@
 import { useEffect, useState } from 'react'
 import Photo from '../../assets/images/photo.jpg'
 import apis, { BaseUrl } from '../../apis'
-import { NavLink, useParams } from 'react-router-dom'
+import { NavLink, useNavigate, useParams } from 'react-router-dom'
 import useAuth from '../../ahooks/useAuth'
 import Button from '../common/Button'
 import moment from 'moment'
 import { BiArrowBack } from 'react-icons/bi'
+import Swal from 'sweetalert2'
 
 const DetailStaff = () => {
     const { auth } = useAuth()
     const { id } = useParams()
     const [user, setUser] = useState([])
     const Staff = user?.data
+    const navigate = useNavigate()
 
     useEffect(() => {
         const getUser = async () => {
@@ -24,6 +26,42 @@ const DetailStaff = () => {
         }
         getUser()
     }, [id, auth])
+
+    const AlertDelete = () => {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                doDelete()
+                Swal.fire(
+                    'Deleted!',
+                    'Your file has been deleted.',
+                    'success'
+                )
+                navigate('/people')
+            }
+        })
+    }
+
+    const doDelete = async () => {
+        try {
+            await apis(`/api/delete/${id}`, {
+                headers: {
+                    Authorization: `Bearer ${auth?.token}`,
+                },
+                method: "PUT"
+            })
+
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
     return (
         <div>
@@ -48,7 +86,12 @@ const DetailStaff = () => {
                             className='bg-[#F6E7E6] h-[40px] px-2 py-1 rounded-md tracking-wider text-[17px] text-[#3A5372] shadow hover:shadow-md  mb-2'
                         />
                     </NavLink>
-                    <div className={`${Staff?.is_deleted === '0' ? "bg-[#3A5372] text-white" : "bg-[#E6F3E5]"} flex justify-center rounded px-2 py-1`}>{Staff?.is_deleted === '0' ? "Active" : "Non-Active"}</div>
+                    <Button
+                        name={`${Staff?.is_deleted ? "Non-Active" : "Active"}`}
+                        className={`${Staff?.is_deleted ? "bg-[#E6F3E5]" : "bg-[#3A5372] text-white"} flex justify-center rounded px-2 py-1 ${!Staff?.is_deleted ? 'hover:shadow-md' : ''} `}
+                        onClick={AlertDelete}
+                        disabled={Staff?.is_deleted ? true : false}
+                    />
                 </div>
 
             </div>
