@@ -112,7 +112,7 @@ const AddUser = () => {
 
     return (
         <div>
-            <h1 className='text-[26px] font-bold text-[#3A5372] mb-5'>Create User Account</h1>
+            <h1 className='text-[26px] font-bold text-[#3A5372] mb-5'>Create Account</h1>
             <div className='grid grid-rows-2 grid-flow-col mb-5'>
                 <div className='row-span-2'>
                     {Staff ?
