@@ -66,7 +66,7 @@ const AddUser = () => {
                 <NavLink to='/people' className='hover:bg-gray-200 mr-4'>
                     <BiArrowBack className='text-[25px] font-bold' />
                 </NavLink>
-                <h1 className='text-[26px] font-bold text-[#3A5372]'>List Staff without Account</h1>
+                <h1 className='text-[26px] font-bold text-[#3A5372]'>Create Account</h1>
             </div>
             <div className={nip.length === 0 ? '' : 'grid grid-cols-5 gap-2'}>
                 {content}
