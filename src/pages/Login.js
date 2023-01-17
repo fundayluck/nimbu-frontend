@@ -75,7 +75,7 @@ const Login = () => {
                                 />
 
                                 <div className={`transition duration-200 ease-out bg-[#FDE4E1] border text-red-700  rounded relative  ${errorMsg ? 'scale-10 mt-[12px] px-4 py-3' : 'scale-0'}`} role="alert">
-                                    <span className="block sm:inline">{errorMsg}.</span>
+                                    <span className="block sm:inline">{errorMsg}</span>
                                     <span className="absolute top-0 bottom-0 right-0 px-4 py-3" >
                                         <svg
                                             className="fill-current h-6 w-6 text-black-500"
