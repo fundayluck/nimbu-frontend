@@ -97,40 +97,40 @@ const DetailStaff = () => {
             </div>
             <div className='grid grid-cols-2  ml-12 mr-[25%]'>
                 <div className=' flex flex-col'>
-                    <label className='text-[18px] text-[#3A5372] font-bold pl-1'>NIP</label>
-                    <div className='p-2 text-[20px] text-[#3A5372]'>{Staff?._id}</div>
+                    <label className='text-[20px] text-[#3A5372] font-bold pl-1'>NIP</label>
+                    <div className='p-2 text-[18px] text-[#3A5372]'>{Staff?._id}</div>
                 </div>
                 <div className=' flex flex-col'>
-                    <label className='text-[18px] text-[#3A5372] font-bold pl-1'>Name</label>
-                    <div className='p-2 text-[20px] text-[#3A5372]'>{Staff?.name}</div>
+                    <label className='text-[20px] text-[#3A5372] font-bold pl-1'>Name</label>
+                    <div className='p-2 text-[18px] text-[#3A5372]'>{Staff?.name}</div>
                 </div>
                 <div className='flex flex-col'>
-                    <label className='text-[18px] text-[#3A5372] font-bold pl-1'>Position</label>
-                    <div className='p-2 text-[20px] text-[#3A5372]'>{Staff?.id_division.name}</div>
+                    <label className='text-[20px] text-[#3A5372] font-bold pl-1'>Position</label>
+                    <div className='p-2 text-[18px] text-[#3A5372]'>{Staff?.id_division.name}</div>
                 </div>
                 <div className='flex flex-col'>
-                    <label className='text-[18px] text-[#3A5372] font-bold pl-1'>Phone</label>
-                    <div className='p-2 text-[20px] text-[#3A5372]'>{Staff?.phone}</div>
+                    <label className='text-[20px] text-[#3A5372] font-bold pl-1'>Phone</label>
+                    <div className='p-2 text-[18px] text-[#3A5372]'>{Staff?.phone}</div>
                 </div>
                 <div className='flex flex-col'>
-                    <label className='text-[18px] text-[#3A5372] font-bold pl-1'>Area</label>
-                    <div className='p-2 text-[20px] text-[#3A5372]'>{Staff?.area}</div>
+                    <label className='text-[20px] text-[#3A5372] font-bold pl-1'>Area</label>
+                    <div className='p-2 text-[18px] text-[#3A5372]'>{Staff?.area}</div>
                 </div>
                 <div className='flex flex-col'>
-                    <label className='text-[18px] text-[#3A5372] font-bold pl-1'>Address</label>
-                    <div className='p-2 text-[20px] text-[#3A5372]'>{Staff?.address}</div>
+                    <label className='text-[20px] text-[#3A5372] font-bold pl-1'>Address</label>
+                    <div className='p-2 text-[18px] text-[#3A5372]'>{Staff?.address}</div>
                 </div>
                 <div className='flex flex-col'>
-                    <label className='text-[18px] text-[#3A5372] font-bold pl-1'>Date Birth</label>
-                    <div className='p-2 text-[20px] text-[#3A5372]'>{moment(Staff?.birth).format('DD MMMM YYYY')}</div>
+                    <label className='text-[20px] text-[#3A5372] font-bold pl-1'>Date Birth</label>
+                    <div className='p-2 text-[18px] text-[#3A5372]'>{moment(Staff?.birth).format('DD MMMM YYYY')}</div>
                 </div>
                 <div className='flex flex-col '>
-                    <label className='text-[18px] text-[#3A5372] font-bold pl-1'>Gender</label>
-                    <div className='p-2 text-[20px] text-[#3A5372]'>{Staff?.gender}</div>
+                    <label className='text-[20px] text-[#3A5372] font-bold pl-1'>Gender</label>
+                    <div className='p-2 text-[18px] text-[#3A5372]'>{Staff?.gender}</div>
                 </div>
                 <div className='flex flex-col'>
-                    <label className='text-[18px] text-[#3A5372] font-bold pl-1'>NIK</label>
-                    <div className='p-2 text-[20px] text-[#3A5372]'>{Staff?.NIK}</div>
+                    <label className='text-[20px] text-[#3A5372] font-bold pl-1'>NIK</label>
+                    <div className='p-2 text-[18px] text-[#3A5372]'>{Staff?.NIK}</div>
                 </div>
             </div>
         </div >
