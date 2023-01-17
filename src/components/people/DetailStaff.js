@@ -35,13 +35,13 @@ const DetailStaff = () => {
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!'
+            confirmButtonText: 'Yes, deactivate account!'
         }).then((result) => {
             if (result.isConfirmed) {
                 doDelete()
                 Swal.fire(
-                    'Deleted!',
-                    'Your file has been deleted.',
+                    'deactivate account!',
+                    'The employee has been deactivated.',
                     'success'
                 )
                 navigate('/people')
@@ -57,7 +57,6 @@ const DetailStaff = () => {
                 },
                 method: "PUT"
             })
-
         } catch (error) {
             console.log(error);
         }
