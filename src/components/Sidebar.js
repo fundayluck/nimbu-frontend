@@ -48,7 +48,6 @@ const Sidebar = () => {
     const [id, setId] = useState(null)
     const [data, setData] = useState(null)
     const getId = id?.userId
-    console.log(data?.role);
 
     useEffect(() => {
         const getUser = async () => {
