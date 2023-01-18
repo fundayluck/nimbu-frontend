@@ -13,6 +13,8 @@ import ListNipWithoutAccount from "./components/people/ListNipWithoutAccount";
 import AddUser from "./components/people/AddUser";
 import DetailStaff from "./components/people/DetailStaff";
 import EditStaff from "./components/people/EditStaff";
+import DetailUser from "./components/user/DetailUser";
+import EditUser from "./components/user/EditUser";
 
 function App() {
   const { auth } = useAuth();
@@ -30,6 +32,8 @@ function App() {
       <Route element={<PrivateRoutes />}>
         <Route element={<Layout />}>
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/detail-user" element={<DetailUser />} />
+          <Route path="/detail-user/edit/:id" element={<EditUser />} />
           <Route path="/attendance" element={<Attendance />} />
           <Route path="/people" element={<People />} />
           <Route path="/people/:id" element={<DetailStaff />} />

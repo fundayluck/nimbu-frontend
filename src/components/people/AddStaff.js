@@ -8,7 +8,7 @@ import Swal from 'sweetalert2';
 import moment from 'moment';
 import { ImSpinner2 } from 'react-icons/im';
 
-const AddStaff = ({ edit }) => {
+const AddStaff = ({ edit, user }) => {
     const { auth } = useAuth()
     const [nip, setNip] = useState('')
     const [name, setName] = useState('')
@@ -148,7 +148,8 @@ const AddStaff = ({ edit }) => {
                 }
             })
             setIsLoading(false)
-            navigate('/people')
+            user === undefined && navigate('/people')
+            user === true && navigate('/detail-user')
             Swal.fire({
                 position: 'center',
                 icon: 'success',
