@@ -1,8 +1,8 @@
 import { Routes, Route, Navigate } from "react-router-dom"
 import Login from "./pages/Login"
-import Dashboard from "./pages/Dashboard"
 import PrivateRoutes from "./components/PrivateRoutes";
 import Attendance from "./pages/Attendance";
+import Dashboard from './pages/Dashboard'
 import Layout from "./components/Layout";
 import People from "./pages/People";
 import Request from "./pages/Request";
@@ -26,7 +26,7 @@ function App() {
         element={<Navigate to={auth?.status ? '/dashboard' : '/login'} />}
       />
       <Route
-        path={auth?.status === true ? "/dashboard" : '/login'}
+        path={auth?.status === true ? "/" : '/login'}
         element={auth?.status === true ? <Layout /> : <Login />}
       />
       <Route element={<PrivateRoutes />}>
