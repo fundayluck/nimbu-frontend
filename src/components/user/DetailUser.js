@@ -67,13 +67,13 @@ const DetailUser = () => {
                     <NavLink to={`edit/${getStaffByUser}`}>
                         <Button
                             name='Edit Employee'
-                            className='bg-[#F6E7E6] h-[40px] w-[150px] px-2 py-1 rounded-md tracking-wider text-[17px] text-[#3A5372] shadow hover:shadow-md  mb-2'
+                            className='bg-[#F6E7E6] h-[40px] w-[170px] px-2 py-1 rounded-md tracking-wider text-[17px] text-[#3A5372] shadow hover:shadow-md  mb-2'
                         />
                     </NavLink>
                     <NavLink >
                         <Button
                             name='Forgot Password'
-                            className='bg-[#F6E7E6] h-[40px] w-[150px] px-2 py-1 rounded-md tracking-wider text-[17px] text-[#3A5372] shadow hover:shadow-md  mb-2'
+                            className='bg-[#F6E7E6] h-[40px] w-[170px] px-2 py-1 rounded-md tracking-wider text-[17px] text-[#3A5372] shadow hover:shadow-md  mb-2'
                         />
                     </NavLink>
                 </div>
