@@ -4,6 +4,8 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import { BiChevronDown, BiChevronLeft } from 'react-icons/bi'
 import { BaseUrl } from '../apis';
 import useAuth from '../ahooks/useAuth';
+import { AiTwotoneSetting } from 'react-icons/ai'
+import { TbLogout } from 'react-icons/tb'
 
 const Headbar = ({ data }) => {
     const { setAuth } = useAuth()
@@ -84,16 +86,16 @@ const Headbar = ({ data }) => {
                         <NavLink
                             to='/detail-user'
                             onClick={() => setIsOpen(false)}
-                            className="block px-4 py-2  text-sm text-gray-500 rounded-lg  hover:text-gray-700"
+                            className="flex items-center block px-4 py-2  text-sm text-gray-500 rounded-lg  hover:text-gray-700"
                         >
-                            Account Setting
+                            <AiTwotoneSetting className='mr-2' />  Account Setting
                         </NavLink>
-                        <button
+                        <NavLink
                             onClick={handleLogout}
-                            className="block px-4 py-2  text-sm text-gray-500 rounded-lg hover:text-gray-700"
+                            className="flex items-center block px-4 py-2  text-sm text-gray-500 rounded-lg hover:text-gray-700"
                         >
-                            Logout
-                        </button>
+                            <TbLogout className='mr-2' />  Logout
+                        </NavLink>
                     </div>
                 </div>
             </div>
