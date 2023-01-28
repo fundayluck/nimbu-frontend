@@ -6,7 +6,6 @@ import Button from './common/Button'
 
 const AttendanceStep = ({ closeModal }) => {
     const [stepOne, setStepOne] = useState(false)
-    console.log(stepOne);
 
     useEffect(() => {
         document.body.classList.add('overflow-hidden')
@@ -37,9 +36,9 @@ const AttendanceStep = ({ closeModal }) => {
     }
 
     return ReactDOM.createPortal(
-        <div className='flex justify-center'>
+        <div className='flex justify-center '>
             <div className="fixed inset-0 bg-gray-300 opacity-80"></div>
-            <div className={`fixed inset-40 top-10 bg-white w-[72%] h-[87%] p-2 rounded`}>
+            <div className={`fixed inset-40 top-10 p-2 rounded`}>
                 <div className='flex justify-center items-center'>
                     {renderContent}
                 </div>

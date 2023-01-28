@@ -21,7 +21,6 @@ const MyLocation = ({ center, setCenter }) => {
 
 const ToMap = () => {
     const [center, setCenter] = useState(null)
-    console.log(center);
 
     useEffect(() => {
         const L = require("leaflet");
