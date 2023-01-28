@@ -322,7 +322,7 @@ const AddStaff = ({ edit, user }) => {
                             type='submit'
                             className='bg-[#F6E7E6] h-[40px] px-2 py-1 rounded-md tracking-wider text-[17px] text-[#3A5372] shadow hover:shadow-md mr-2'
                         />
-                        <NavLink to='/People'>
+                        <NavLink to={user ? '/detail-user' : '/People'}>
                             <Button
                                 name='Discard'
                                 type='button'
