@@ -5,8 +5,10 @@ module.exports = {
     extend: {
       backgroundImage: {
         'Background-login': "url('../assets/images/LoginBackground.png')",
-      }
+      },
     },
   },
-  plugins: [],
+  plugins: [
+    require('tailwind-scrollbar'),
+  ],
 }

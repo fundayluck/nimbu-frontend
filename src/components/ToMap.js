@@ -1,27 +1,34 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { MapContainer, Marker, Popup, TileLayer, useMapEvents } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
+import moment from 'moment';
 
 const MyLocation = ({ center, setCenter }) => {
+    const date = new Date()
+    console.log(date);
     const map = useMapEvents({
         click: () => {
             map.locate()
         },
         locationfound: (location) => {
-            setCenter(location.latlng)
+            setCenter({
+                latitude: location.latlng.lat,
+                longitude: location.latlng.lng,
+                image: null,
+                date: moment(date).format('DD-MM-YYYY'),
+                clock_in: date
+            })
             map.flyTo(location.latlng, 15)
         },
     })
     return center === null ? null : (
-        <Marker position={center}>
+        <Marker position={{ lat: center.latitude, lng: center.longitude }}>
             <Popup>You are here</Popup>
         </Marker>
     )
 }
 
-const ToMap = () => {
-    const [center, setCenter] = useState(null)
-
+const ToMap = ({ data, setData }) => {
     useEffect(() => {
         const L = require("leaflet");
 
@@ -35,7 +42,6 @@ const ToMap = () => {
     }, []);
 
     return (
-
         <MapContainer
             zoom={5}
             center={[-1.0933299, 113.2829777]}
@@ -46,10 +52,9 @@ const ToMap = () => {
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
-            <MyLocation center={center} setCenter={setCenter} />
+            <MyLocation center={data} setCenter={setData} />
         </MapContainer>
     )
-
 }
 
 export default ToMap

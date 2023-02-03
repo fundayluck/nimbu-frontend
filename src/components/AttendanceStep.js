@@ -3,9 +3,58 @@ import ReactDOM from 'react-dom'
 import ToFaceCam from './ToFaceCam'
 import ToMap from './ToMap'
 import Button from './common/Button'
+import Swal from 'sweetalert2'
+import apis from '../apis'
+import useAuth from '../ahooks/useAuth'
+// import { useNavigate } from 'react-router-dom'
 
 const AttendanceStep = ({ closeModal }) => {
+    const { auth } = useAuth()
     const [stepOne, setStepOne] = useState(false)
+    const [sendAttend, setSendAttend] = useState(false)
+    // const navigate = useNavigate()
+
+    const [data, setData] = useState({
+        latitude: null,
+        longitude: null,
+        image: null,
+        date: null,
+        clock_in: null
+    })
+
+    const getAttend = async () => {
+        try {
+            const formData = new FormData()
+            formData.append("latitude", data.latitude)
+            formData.append("longitude", data.longitude)
+            formData.append("image", data.image)
+            formData.append("date", data.date)
+            formData.append("clock_in", data.clock_in)
+            await apis.post(
+                'api/attendance/clock_in',
+                formData,
+                {
+                    headers: {
+                        Authorization: `Bearer ${auth?.token}`,
+                    },
+                }
+            )
+            Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: "anda berhasil absen!",
+                showConfirmButton: false,
+            })
+            closeModal(false)
+        } catch (error) {
+            Swal.fire({
+                position: 'center',
+                icon: 'warning',
+                title: error.response.data.message,
+                showConfirmButton: false,
+            })
+        }
+    }
 
     useEffect(() => {
         document.body.classList.add('overflow-hidden')
@@ -19,13 +68,36 @@ const AttendanceStep = ({ closeModal }) => {
     let renderContent;
 
     if (!stepOne) {
-        renderContent = <ToMap />
+        renderContent = <ToMap data={data} setData={setData} />
     } else if (stepOne) {
-        renderContent = <ToFaceCam />
+        renderContent = <ToFaceCam data={data} setData={setData} />
     }
 
-    const handleNext = () => {
-        setStepOne(true)
+    const handleNext = async () => {
+        if (data.latitude === null && data.longitude === null)
+            Swal.fire({
+                position: 'center',
+                icon: 'warning',
+                title: "konfirmasi Lokasi terlebih dahulu",
+                showConfirmButton: true,
+            })
+        else {
+            setStepOne(true)
+            setSendAttend(true)
+            if (sendAttend === true) {
+                if (data.image === null)
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'warning',
+                        title: "foto terlebih dahulu",
+                        showConfirmButton: true,
+                    })
+                else {
+                    closeModal(false)
+                    await getAttend()
+                }
+            }
+        }
     }
 
     const handleBack = () => {
@@ -44,7 +116,7 @@ const AttendanceStep = ({ closeModal }) => {
                 </div>
                 <div className='p-2 flex justify-center items-center'>
                     <Button onClick={handleBack} name='back' className='bg-blue-500 text-white py-2 px-4 mr-1 rounded' />
-                    <Button onClick={handleNext} name='next' className='bg-blue-500 text-white py-2 px-4 mr-1 rounded' />
+                    <Button onClick={handleNext} name={stepOne ? 'send' : 'next'} className='bg-blue-500 text-white py-2 px-4 mr-1 rounded' />
                 </div>
             </div>
         </div>,

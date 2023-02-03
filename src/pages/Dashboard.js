@@ -69,7 +69,7 @@ const Dashboard = () => {
 
                 <h1 className='ml-6 text-[26px] font-bold text-[#3A5372] mt-10 mb-2'>Attendance History</h1>
                 <div className='ml-5'>
-                    <div className='bg-white rounded-md mb-2 w-[90%] px-10 py-5 shadow-md' >
+                    <div className='overflow-auto scrollbar-thin scrollbar-thumb-slate-200 scrollbar-track-[#F1F9F9] bg-white rounded-md mb-2 w-[90%] h-[340px] px-10 py-5 shadow-md' >
                         <p className='text-[18px] text-[#3A5372] py-2 ml-[22px]'>
                             <strong>Afan Dayu Laksono</strong> had clocked out on Wednesday, 04 January 2023 at 17.20.00
                         </p>
@@ -78,6 +78,21 @@ const Dashboard = () => {
                         </p>
                         <p className='text-[18px] text-[#3A5372] py-2 ml-[22px]'>
                             <strong>Afan Dayu Laksono</strong> had clocked out on Tuesday, 03 January 2023 at 17.32.00
+                        </p>
+                        <p className='text-[18px] text-[#3A5372] py-2 ml-[22px]'>
+                            <strong>Afan Dayu Laksono</strong> had clocked in on Tuesday, 04 January 2023 at 07.41.00
+                        </p>
+                        <p className='text-[18px] text-[#3A5372] py-2 ml-[22px]'>
+                            <strong>Afan Dayu Laksono</strong> had clocked in on Tuesday, 04 January 2023 at 07.41.00
+                        </p>
+                        <p className='text-[18px] text-[#3A5372] py-2 ml-[22px]'>
+                            <strong>Afan Dayu Laksono</strong> had clocked in on Tuesday, 04 January 2023 at 07.41.00
+                        </p>
+                        <p className='text-[18px] text-[#3A5372] py-2 ml-[22px]'>
+                            <strong>Afan Dayu Laksono</strong> had clocked in on Tuesday, 04 January 2023 at 07.41.00
+                        </p>
+                        <p className='text-[18px] text-[#3A5372] py-2 ml-[22px]'>
+                            <strong>Afan Dayu Laksono</strong> had clocked in on Tuesday, 04 January 2023 at 07.41.00
                         </p>
                         <p className='text-[18px] text-[#3A5372] py-2 ml-[22px]'>
                             <strong>Afan Dayu Laksono</strong> had clocked in on Tuesday, 04 January 2023 at 07.41.00

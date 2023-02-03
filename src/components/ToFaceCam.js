@@ -1,10 +1,10 @@
-import React, { useCallback, useRef, useState } from 'react'
+import React, { useCallback, useRef } from 'react'
 import Webcam from "react-webcam";
 import { AiOutlineCamera } from 'react-icons/ai'
 import { MdReplay } from 'react-icons/md'
 
-const ToFaceCam = () => {
-    const [img, setImg] = useState(null);
+const ToFaceCam = ({ data, setData }) => {
+
     const webcamRef = useRef(null);
 
     const videoConstraints = {
@@ -15,11 +15,13 @@ const ToFaceCam = () => {
 
     const capture = useCallback(() => {
         const imageSrc = webcamRef.current.getScreenshot();
-        setImg(imageSrc);
-    }, [webcamRef]);
+        console.log(imageSrc);
+        setData({ ...data, image: imageSrc });
+    }, [webcamRef, setData, data]);
+
     return (
         <>
-            {img === null ? (
+            {data?.image === null ? (
                 <div className='flex flex-row justify-center items-end mb-2'>
                     <Webcam
                         audio={false}
@@ -31,16 +33,16 @@ const ToFaceCam = () => {
                         videoConstraints={videoConstraints}
                         className='rounded-full'
                     />
-                    <div className='absolute text-black border border-black border-1 p-2 rounded-full cursor-pointer mb-2 hover:bg-gray-300' onClick={capture}>
+                    <div className='absolute text-black border border-black bg-gray-200 border-1 p-2 rounded-full cursor-pointer mb-2 hover:bg-gray-300' onClick={capture}>
                         <AiOutlineCamera className='text-4xl' />
                     </div>
                 </div>
             ) : (
                 <div className='flex flex-row justify-center items-end'>
-                    <img src={img} alt="screenshot" className='rounded-full' />
+                    <img src={data.image} alt="screenshot" className='rounded-full' />
                     <div
-                        className='absolute text-black border border-gray-300 border-1 p-2 rounded-full cursor-pointer mb-2 hover:bg-gray-100 '
-                        onClick={() => setImg(null)}
+                        className='absolute text-black border border-gray-300 bg-gray-200 border-1 p-2 rounded-full cursor-pointer mb-2 hover:bg-gray-300 '
+                        onClick={() => setData({ image: null })}
                     >
                         <MdReplay className='text-4xl text-black' />
                     </div>
