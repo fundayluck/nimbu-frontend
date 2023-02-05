@@ -6,14 +6,12 @@ import Button from './common/Button'
 import Swal from 'sweetalert2'
 import apis from '../apis'
 import useAuth from '../ahooks/useAuth'
-// import { useNavigate } from 'react-router-dom'
 
-const AttendanceStep = ({ closeModal }) => {
+const AttendanceStep = ({ closeModal, status }) => {
     const { auth } = useAuth()
     const [stepOne, setStepOne] = useState(false)
     const [sendAttend, setSendAttend] = useState(false)
-    // const navigate = useNavigate()
-
+    const date = new Date()
     const [data, setData] = useState({
         latitude: null,
         longitude: null,
@@ -22,7 +20,7 @@ const AttendanceStep = ({ closeModal }) => {
         clock_in: null
     })
 
-    const getAttend = async () => {
+    const getAttendIn = async () => {
         try {
             const formData = new FormData()
             formData.append("latitude", data.latitude)
@@ -46,6 +44,7 @@ const AttendanceStep = ({ closeModal }) => {
                 showConfirmButton: false,
             })
             closeModal(false)
+            window.location.reload()
         } catch (error) {
             Swal.fire({
                 position: 'center',
@@ -53,6 +52,30 @@ const AttendanceStep = ({ closeModal }) => {
                 title: error.response.data.message,
                 showConfirmButton: false,
             })
+        }
+    }
+
+    const getAttendOut = async () => {
+        try {
+            await apis('api/attendance/clock_out', {
+                headers: {
+                    Authorization: `Bearer ${auth?.token}`,
+                },
+                method: "POST",
+                data: {
+                    clock_out: date
+                }
+            })
+            Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: "anda berhasil absen!",
+                showConfirmButton: false,
+            })
+            closeModal(false)
+            window.location.reload()
+        } catch (error) {
+            console.log(error);
         }
     }
 
@@ -94,7 +117,11 @@ const AttendanceStep = ({ closeModal }) => {
                     })
                 else {
                     closeModal(false)
-                    await getAttend()
+                    if (status.clock_out) {
+                        await getAttendOut()
+                    } else {
+                        await getAttendIn()
+                    }
                 }
             }
         }

@@ -5,7 +5,6 @@ import moment from 'moment';
 
 const MyLocation = ({ center, setCenter }) => {
     const date = new Date()
-    console.log(date);
     const map = useMapEvents({
         click: () => {
             map.locate()
@@ -15,7 +14,7 @@ const MyLocation = ({ center, setCenter }) => {
                 latitude: location.latlng.lat,
                 longitude: location.latlng.lng,
                 image: null,
-                date: moment(date).format('DD-MM-YYYY'),
+                date: moment(date).format('YYYY-MM-DD'),
                 clock_in: date
             })
             map.flyTo(location.latlng, 15)
