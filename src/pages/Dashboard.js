@@ -16,6 +16,7 @@ const Dashboard = () => {
     const [id, setId] = useState(null)
     const [data, setData] = useState(null)
     const [attend, setAttend] = useState([])
+    console.log(attend);
     const attends = attend?.data
     const user = data?.data
     const getId = id?.userId
@@ -51,7 +52,7 @@ const Dashboard = () => {
             <Button
                 name='Clock Out'
                 disabled
-                className={`bg-gray-500 text-white px-5 py-1 rounded`}
+                className={`bg-[#D9D9D9] text-white px-5 py-1 rounded`}
                 onClick={_toMap}
             />
 
@@ -108,12 +109,16 @@ const Dashboard = () => {
 
     useEffect(() => {
         const getAttend = async () => {
-            const response = await apis.get('api/attendancebyid', {
-                headers: {
-                    Authorization: `Bearer ${auth.token}`
-                }
-            })
-            setAttend(response.data)
+            try {
+                const response = await apis.get('api/attendancebyid', {
+                    headers: {
+                        Authorization: `Bearer ${auth.token}`
+                    }
+                })
+                setAttend(response.data)
+            } catch (error) {
+                setAttend(error.response.data.message);
+            }
         }
         getAttend()
     }, [auth])
@@ -140,7 +145,7 @@ const Dashboard = () => {
                                     />
                                     :
                                     < img
-                                        className='w-[50px] h-[50px] rounded-md border-2 border-[#3A5372]'
+                                        className='w-[50px] h-[50px] rounded-[15px] border-2 border-[#3A5372]'
                                         src={`${BaseUrl}/${data?.data.id_staff.photo}`}
                                         alt='avatar'
                                     />
@@ -163,9 +168,9 @@ const Dashboard = () => {
 
                 <h1 className='ml-6 text-[26px] font-bold text-[#3A5372] mt-10 mb-2'>Attendance History</h1>
                 <div className='ml-5'>
-                    <div className='overflow-auto scrollbar-thin scrollbar-thumb-slate-200 scrollbar-track-[#F1F9F9] bg-white rounded-md mb-2 w-[90%] h-[340px] px-10 py-5 shadow-md' >
+                    <div className={`overflow-auto scrollbar-thin scrollbar-thumb-slate-200 scrollbar-track-[#F1F9F9] bg-white rounded-md mb-2 w-[90%] h-[340px] px-10 py-5 shadow-md`} >
                         {attends ? attends.map((item, index) => (
-                            < Fragment key={index} >
+                            <Fragment key={index}>
                                 <p className='text-[18px] text-[#3A5372] py-2 ml-[22px]'>
                                     You had clocked in on {moment(item.date).format('dddd, DD MMM YYYY')} at {moment(item.clock_in).format('LT')}
                                 </p>
@@ -177,7 +182,11 @@ const Dashboard = () => {
                                         : ''
                                 }
                             </Fragment>
-                        )) : []}
+                        )) :
+                            <div className='flex justify-center items-center h-full'>
+                                {attend.message}
+                            </div>
+                        }
                     </div>
                 </div>
             </div>
