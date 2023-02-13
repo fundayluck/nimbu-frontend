@@ -11,13 +11,10 @@ const AttendanceStep = ({ closeModal, status }) => {
     const { auth } = useAuth()
     const [stepOne, setStepOne] = useState(false)
     const [sendAttend, setSendAttend] = useState(false)
-    const date = new Date()
     const [data, setData] = useState({
         latitude: null,
         longitude: null,
         image: null,
-        date: null,
-        clock_in: null
     })
 
     const getAttendIn = async () => {
@@ -26,8 +23,6 @@ const AttendanceStep = ({ closeModal, status }) => {
             formData.append("latitude", data.latitude)
             formData.append("longitude", data.longitude)
             formData.append("image", data.image)
-            formData.append("date", data.date)
-            formData.append("clock_in", data.clock_in)
             await apis.post(
                 'api/attendance/clock_in',
                 formData,
@@ -40,7 +35,7 @@ const AttendanceStep = ({ closeModal, status }) => {
             Swal.fire({
                 position: 'center',
                 icon: 'success',
-                title: "anda berhasil absen!",
+                title: "anda berhasil masuk!",
                 showConfirmButton: false,
             })
             closeModal(false)
@@ -57,25 +52,31 @@ const AttendanceStep = ({ closeModal, status }) => {
 
     const getAttendOut = async () => {
         try {
-            await apis('api/attendance/clock_out', {
-                headers: {
-                    Authorization: `Bearer ${auth?.token}`,
-                },
-                method: "POST",
-                data: {
-                    clock_out: date
+            const formData = new FormData()
+            formData.append("image", data.image)
+            await apis.post('api/attendance/clock_out',
+                formData,
+                {
+                    headers: {
+                        Authorization: `Bearer ${auth?.token}`,
+                    },
                 }
-            })
+            )
             Swal.fire({
                 position: 'center',
                 icon: 'success',
-                title: "anda berhasil absen!",
+                title: "anda berhasil keluar!",
                 showConfirmButton: false,
             })
             closeModal(false)
             window.location.reload()
         } catch (error) {
-            console.log(error);
+            Swal.fire({
+                position: 'center',
+                icon: 'warning',
+                title: error.response.data.message,
+                showConfirmButton: false,
+            })
         }
     }
 

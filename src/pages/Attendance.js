@@ -58,12 +58,12 @@ const Attendance = () => {
                     <div className='flex justify-center flex-col items-center  h-[73px] text-[#3A5372] text-[17px]'>
                         <Button
                             className='bg-[#E6F3E5] px-4 text-[#4EAF51] rounded-md text-[16px]'
-                            name='Attend'
+                            name={item.status}
                         />
                     </div>
                     <div className='flex justify-center flex-col items-center h-[73px] text-[#3A5372] text-[17px] '><Button className='px-2 flex justify-center rounded border-2 border-[#E1F2FB]' name='.png' /></div>
                     <div className='absolute mt-[55px] right-[120px] text-xs '>
-                        {moment(item?.clock_in).format('hh : mm : ss')}
+                        {moment(item?.clock_in).format('LT')}
                     </div>
                 </div>
             </Fragment>

@@ -1,10 +1,8 @@
 import { useEffect } from 'react'
 import { MapContainer, Marker, Popup, TileLayer, useMapEvents } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
-import moment from 'moment';
 
 const MyLocation = ({ center, setCenter }) => {
-    const date = new Date()
     const map = useMapEvents({
         click: () => {
             map.locate()
@@ -14,8 +12,6 @@ const MyLocation = ({ center, setCenter }) => {
                 latitude: location.latlng.lat,
                 longitude: location.latlng.lng,
                 image: null,
-                date: moment(date).format('YYYY-MM-DD'),
-                clock_in: date
             })
             map.flyTo(location.latlng, 15)
         },

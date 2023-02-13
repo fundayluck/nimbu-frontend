@@ -81,7 +81,7 @@ const Users = ({ show }) => {
     return (
         <div className={`${show ? '' : 'hidden'}`}>
             <div className='flex justify-between mt-[33px] mr-24 ml-2 mb-4'>
-                <AiOutlineSearch className='fixed mt-2 ml-1 text-[#555770]' />
+                <AiOutlineSearch className='absolute mt-2 ml-1 text-[#555770]' />
                 <input
                     className='h-[30px] px-6 py-1 border border-[#C7C9D9] rounded'
                     placeholder='search of people..'

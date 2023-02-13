@@ -15,7 +15,6 @@ const ToFaceCam = ({ data, setData }) => {
 
     const capture = useCallback(() => {
         const imageSrc = webcamRef.current.getScreenshot();
-        console.log(imageSrc);
         setData({ ...data, image: imageSrc });
     }, [webcamRef, setData, data]);
 

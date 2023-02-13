@@ -16,7 +16,6 @@ const Dashboard = () => {
     const [id, setId] = useState(null)
     const [data, setData] = useState(null)
     const [attend, setAttend] = useState([])
-    console.log(attend);
     const attends = attend?.data
     const user = data?.data
     const getId = id?.userId
