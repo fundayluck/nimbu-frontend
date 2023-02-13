@@ -6,6 +6,7 @@ import { ReactComponent as Attendance } from '../assets/logo/Attendance.svg'
 import { ReactComponent as People } from '../assets/logo/People.svg'
 import { ReactComponent as RequestFor } from '../assets/logo/RequestFor.svg'
 import { ReactComponent as AccessRequest } from '../assets/logo/AccessRequest.svg'
+import { AiFillSetting as Configuration } from 'react-icons/ai'
 import useAuth from '../ahooks/useAuth'
 import apis from '../apis'
 import jwtDecode from 'jwt-decode'
@@ -32,13 +33,19 @@ const sidebarList = [
     {
         path: "/request",
         name: "Request For",
-        icon: <RequestFor className='m-2' />,
+        icon: <RequestFor className='m-2  items-center' />,
         protect: false
     },
     {
         path: "/access",
         name: "Access Request",
-        icon: <AccessRequest className='m-2' />,
+        icon: <AccessRequest className='m-2 items-center' />,
+        protect: true
+    },
+    {
+        path: "/config",
+        name: "Configuration",
+        icon: <Configuration className='m-2 text-[21px] text-[#3A5372] items-center' />,
         protect: true
     }
 ]
