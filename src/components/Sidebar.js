@@ -33,19 +33,19 @@ const sidebarList = [
     {
         path: "/request",
         name: "Request For",
-        icon: <RequestFor className='m-2  items-center' />,
+        icon: <RequestFor className='m-2' />,
         protect: false
     },
     {
         path: "/access",
         name: "Access Request",
-        icon: <AccessRequest className='m-2 items-center' />,
+        icon: <AccessRequest className='m-2' />,
         protect: true
     },
     {
         path: "/config",
         name: "Configuration",
-        icon: <Configuration className='m-2 text-[21px] text-[#3A5372] items-center' />,
+        icon: <Configuration className='m-2 text-[21px] text-[#3A5372]' />,
         protect: true
     }
 ]
