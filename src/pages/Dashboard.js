@@ -170,9 +170,6 @@ const Dashboard = () => {
                     <div className={`overflow-auto scrollbar-thin scrollbar-thumb-slate-200 scrollbar-track-[#F1F9F9] bg-white rounded-md mb-2 w-[90%] h-[340px] px-10 py-5 shadow-md`} >
                         {attends ? attends.map((item, index) => (
                             <Fragment key={index}>
-                                <p className='text-[18px] text-[#3A5372] py-2 ml-[22px]'>
-                                    You had clocked in on {moment(item.date).format('dddd, DD MMM YYYY')} at {moment(item.clock_in).format('LT')}
-                                </p>
                                 {
                                     item.clock_out ?
                                         <p className='text-[18px] text-[#3A5372] py-2 ml-[22px]'>
@@ -180,6 +177,9 @@ const Dashboard = () => {
                                         </p>
                                         : ''
                                 }
+                                <p className='text-[18px] text-[#3A5372] py-2 ml-[22px]'>
+                                    You had clocked in on {moment(item.date).format('dddd, DD MMM YYYY')} at {moment(item.clock_in).format('LT')}
+                                </p>
                             </Fragment>
                         )) :
                             <div className='flex justify-center items-center h-full'>
