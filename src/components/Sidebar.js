@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom'
-import { ReactComponent as Logo } from '../assets/logo/title.svg'
+import { ReactComponent as LogoWithoutName } from '../assets/logo/LogoNimboost.svg'
 import { ReactComponent as Dashboard } from '../assets/logo/Dashboard.svg'
 import { ReactComponent as Attendance } from '../assets/logo/Attendance.svg'
 import { ReactComponent as People } from '../assets/logo/People.svg'
@@ -87,7 +87,9 @@ const Sidebar = () => {
     return (
         <div className='flex flex-col items-center w-[250px] fixed top-0 left-0 bottom-0 bg-[#E1F2FB]' >
             <div>
-                <Logo className='w-[150px] mb-5' />
+                <LogoWithoutName
+                    className='w-[200px] mb-5'
+                />
             </div>
             <ul>
                 {sidebarList.map((item, index) => (

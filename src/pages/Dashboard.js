@@ -168,7 +168,7 @@ const Dashboard = () => {
                 <h1 className='ml-6 text-[26px] font-bold text-[#3A5372] mt-10 mb-2'>Attendance History</h1>
                 <div className='ml-5'>
                     <div className={`overflow-auto scrollbar-thin scrollbar-thumb-slate-200 scrollbar-track-[#F1F9F9] bg-white rounded-md mb-2 w-[90%] h-[340px] px-10 py-5 shadow-md`} >
-                        {attends ? attends.map((item, index) => (
+                        {attends ? attends.slice(0).reverse().map((item, index) => (
                             <Fragment key={index}>
                                 {
                                     item.clock_out ?
