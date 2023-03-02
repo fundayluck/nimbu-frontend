@@ -61,10 +61,14 @@ const Attendance = () => {
                             name={item.status}
                         />
                     </div>
-                    <div className='flex justify-center flex-col items-center h-[73px] text-[#3A5372] text-[17px] '><Button className='px-2 flex justify-center rounded border-2 border-[#E1F2FB]' name='.png' /></div>
-                    <div className='absolute mt-[55px] right-[120px] text-xs '>
-                        {moment(item?.clock_in).format('LT')}
+                    <div className='flex justify-center flex-col items-center h-[73px] text-[#3A5372] text-[17px] '>
+                        {moment(item.clock_in).format('LT')} - {item.clock_out ?
+                            moment(item.clock_out).format('LT')
+                            :
+                            'Present'
+                        }
                     </div>
+
                 </div>
             </Fragment>
         )
@@ -97,7 +101,7 @@ const Attendance = () => {
                         <div className='flex justify-center text-[22px] text-[#C2A3A1]'>Employee</div>
                         <div className='flex justify-center text-[22px] text-[#C2A3A1] '>Date</div>
                         <div className='flex justify-center text-[22px] text-[#C2A3A1] '>Status</div>
-                        <div className='flex justify-center items-center text-[22px] text-[#C2A3A1] '><Menu /></div>
+                        <div className='flex justify-center items-center text-[22px] text-[#C2A3A1] '>Time</div>
                     </div>
                 </div>
                 <div className='w-[92%]' >
