@@ -180,6 +180,7 @@ const Dashboard = () => {
                                 <p className='text-[18px] text-[#3A5372] py-2 ml-[22px]'>
                                     You had clocked in on {moment(item.date).format('dddd, DD MMM YYYY')} at {moment(item.clock_in).format('LT')}
                                 </p>
+
                             </Fragment>
                         )) :
                             <div className='flex justify-center items-center h-full'>

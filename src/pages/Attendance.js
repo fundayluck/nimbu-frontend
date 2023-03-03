@@ -3,7 +3,6 @@ import useAuth from '../ahooks/useAuth'
 import apis, { BaseUrl } from '../apis'
 import { ImSpinner2 } from 'react-icons/im'
 import moment from 'moment'
-import { BiDotsVerticalRounded as Menu } from 'react-icons/bi'
 import Button from '../components/common/Button'
 
 const Attendance = () => {
@@ -40,7 +39,7 @@ const Attendance = () => {
                 <div className='p-4 h-[73px] text-[#3A5372] tracking-wide flex justify-center text-[17px]'><ImSpinner2 className='animate-spin' /></div>
             </div>
     } else if (data.status) {
-        content = attend.map((item, index) =>
+        content = attend.slice(0).reverse().map((item, index) =>
             <Fragment key={index}>
                 <div className='grid grid-cols-5 bg-white rounded-md mb-2' >
                     <div className='flex flex-col justify-center items-center mx-[20px]'>
