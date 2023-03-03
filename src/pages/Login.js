@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { ImSpinner2 } from 'react-icons/im'
+import { IoEye, IoEyeOff } from 'react-icons/io5'
 import LoginImage from '../assets/images/LoginImage.png'
 import apis from '../apis'
 import useAuth from '../ahooks/useAuth'
@@ -11,6 +12,7 @@ const Login = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [errorMsg, setErrorMsg] = useState('')
+    const [show, setShow] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
     const userRef = useRef();
     const navigate = useNavigate()
@@ -47,6 +49,8 @@ const Login = () => {
         e.preventDefault()
         setErrorMsg('')
     }
+
+
     return (
         <div className="flex flex-col justify-center items-center bg-Background-login bg-cover h-screen">
             <div className='w-[75%] h-[85%] bg-white rounded-md bg-[#F1F9F9] shadow-md'>
@@ -66,13 +70,20 @@ const Login = () => {
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
                                 />
-                                <input
-                                    type='password'
-                                    className='border-b-2 w-[320px] px-2 my-2 outline-0 leading-loose'
-                                    placeholder='password'
-                                    value={password}
-                                    onChange={(e) => setPassword(e.target.value)}
-                                />
+                                <div className='flex justify-end items-center'>
+                                    <input
+                                        type={show ? 'text' : 'password'}
+                                        className='border-b-2 w-[320px] px-2 my-2 outline-0 leading-loose'
+                                        placeholder='password'
+                                        value={password}
+                                        onChange={(e) => setPassword(e.target.value)}
+                                    />
+                                    {show
+                                        ?
+                                        <IoEyeOff className='absolute mr-2' onClick={() => (setShow(false))} />
+                                        :
+                                        <IoEye className='absolute mr-2' onClick={() => (setShow(true))} />}
+                                </div>
 
                                 <div className={`transition duration-200 ease-out bg-[#FDE4E1] border text-red-700  rounded relative  ${errorMsg ? 'scale-10 mt-[12px] px-4 py-3' : 'scale-0'}`} role="alert">
                                     <span className="block sm:inline">{errorMsg}</span>
