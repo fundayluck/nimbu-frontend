@@ -34,7 +34,7 @@ const Login = () => {
                 password
             })
             const token = response?.data
-            setAuth({ status: token.status, token: token.token })
+            setAuth({ status: token.status, token: token.token, user: token.user })
             setEmail('')
             setPassword('')
             navigate('/')
@@ -80,9 +80,9 @@ const Login = () => {
                                     />
                                     {show
                                         ?
-                                        <IoEyeOff className='absolute mr-2' onClick={() => (setShow(false))} />
+                                        <IoEyeOff className='absolute mr-2 cursor-pointer' onClick={() => (setShow(false))} />
                                         :
-                                        <IoEye className='absolute mr-2' onClick={() => (setShow(true))} />}
+                                        <IoEye className='absolute mr-2 cursor-pointer' onClick={() => (setShow(true))} />}
                                 </div>
 
                                 <div className={`transition duration-200 ease-out bg-[#FDE4E1] border text-red-700  rounded relative  ${errorMsg ? 'scale-10 mt-[12px] px-4 py-3' : 'scale-0'}`} role="alert">
