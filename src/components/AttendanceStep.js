@@ -32,14 +32,14 @@ const AttendanceStep = ({ closeModal, status }) => {
                     },
                 }
             )
+            closeModal(false)
+            window.location.reload()
             Swal.fire({
                 position: 'center',
                 icon: 'success',
                 title: "anda berhasil masuk!",
                 showConfirmButton: false,
             })
-            closeModal(false)
-            window.location.reload()
         } catch (error) {
             Swal.fire({
                 position: 'center',
@@ -62,14 +62,14 @@ const AttendanceStep = ({ closeModal, status }) => {
                     },
                 }
             )
+            closeModal(false)
+            window.location.reload()
             Swal.fire({
                 position: 'center',
                 icon: 'success',
                 title: "anda berhasil keluar!",
                 showConfirmButton: false,
             })
-            closeModal(false)
-            window.location.reload()
         } catch (error) {
             Swal.fire({
                 position: 'center',
