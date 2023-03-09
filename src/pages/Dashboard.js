@@ -109,7 +109,7 @@ const Dashboard = () => {
     useEffect(() => {
         const getAttend = async () => {
             try {
-                const response = await apis.get('api/attendancebyid', {
+                const response = await apis.get('api/attendancebystaff', {
                     headers: {
                         Authorization: `Bearer ${auth.token}`
                     }

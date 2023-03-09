@@ -4,6 +4,7 @@ import apis, { BaseUrl } from '../apis'
 import { ImSpinner2 } from 'react-icons/im'
 import moment from 'moment'
 import Button from '../components/common/Button'
+import { Link } from 'react-router-dom'
 
 const Attendance = () => {
     const { auth } = useAuth()
@@ -40,7 +41,7 @@ const Attendance = () => {
             </div>
     } else if (data.status) {
         content = attend.slice(0).reverse().map((item, index) =>
-            <Fragment key={index}>
+            <Link key={index}>
                 <div className='grid grid-cols-5 bg-white rounded-md mb-2' >
                     <div className='flex flex-col justify-center items-center mx-[20px]'>
                         < img
@@ -76,7 +77,7 @@ const Attendance = () => {
                     </div>
 
                 </div>
-            </Fragment>
+            </Link>
         )
     } else {
         content =
