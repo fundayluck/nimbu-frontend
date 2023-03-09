@@ -25,7 +25,7 @@ const Attendance = () => {
                 setLoading(false)
             } catch (error) {
                 setLoading(false)
-                setErrMessage(error.response)
+                setErrMessage(error.response.data.message)
             }
         }
         fetch()
@@ -60,11 +60,18 @@ const Attendance = () => {
                             name={item.status}
                         />
                     </div>
-                    <div className='flex justify-center flex-col items-center h-[73px] text-[#3A5372] text-[17px] '>
-                        {moment(item.clock_in).format('LT')} - {item.clock_out ?
-                            moment(item.clock_out).format('LT')
-                            :
-                            'Present'
+                    <div className='flex justify-center items-center h-[73px] text-[#3A5372] text-[17px] '>
+                        {
+                            item.clock_in !== null ? moment(item.clock_in).format('LT') : '--:--'
+                        }&nbsp; <strong>-</strong> &nbsp;{
+                            item.clock_out === null ?
+                                '--:--'
+                                :
+                                (
+                                    item.clock_out ? moment(item.clock_out).format('LT')
+                                        :
+                                        'Present'
+                                )
                         }
                     </div>
 
@@ -73,8 +80,8 @@ const Attendance = () => {
         )
     } else {
         content =
-            <div className='fixed bg-white hover:shadow-xl cursor-pointer rounded-md  w-[69%]'>
-                <div className='p-4 h-[73px] text-[#3A5372] tracking-wide flex justify-center text-[17px]'>{errMessage.data}</div>
+            <div className='fixed bg-white rounded-md  w-[69%]'>
+                <div className='p-4 h-[73px] text-[#3A5372] tracking-wide flex justify-center text-[17px]'>{errMessage}</div>
             </div>
     }
 
