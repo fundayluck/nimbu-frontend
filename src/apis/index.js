@@ -1,7 +1,7 @@
 import axios from "axios"
 
 export default axios.create({
-    baseURL: 'http://localhost:5000',
+    baseURL: 'https://api.nimbu.id',
 })
 
-export const BaseUrl = 'http://localhost:5000'
+export const BaseUrl = 'https://api.nimbu.id'
