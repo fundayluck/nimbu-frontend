@@ -16,6 +16,7 @@ import EditStaff from "./components/people/EditStaff";
 import DetailUser from "./components/user/DetailUser";
 import EditUser from "./components/user/EditUser";
 import Config from "./pages/Config";
+import DetailAttendance from "./components/attendance/DetailAttendance";
 
 function App() {
   const { auth } = useAuth();
@@ -36,6 +37,7 @@ function App() {
           <Route path="/detail-user" element={<DetailUser />} />
           <Route path="/detail-user/edit/:id" element={<EditUser />} />
           <Route path="/attendance" element={<Attendance />} />
+          <Route path="/attendance/:id" element={<DetailAttendance />} />
           <Route path="/people" element={<People />} />
           <Route path="/people/:id" element={<DetailStaff />} />
           <Route path="/people/:id/edit" element={<EditStaff />} />
