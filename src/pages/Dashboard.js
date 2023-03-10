@@ -20,7 +20,6 @@ const Dashboard = () => {
     const user = data?.data
     const getId = id?.userId
     const [button, setButton] = useState([])
-    console.log(button);
     const [showModal, setShowModal] = useState(false)
     const { coords, isGeolocationAvailable, isGeolocationEnabled, positionError } =
         useGeolocated({
