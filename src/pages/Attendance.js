@@ -1,10 +1,10 @@
-import { Fragment, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import useAuth from '../ahooks/useAuth'
 import apis, { BaseUrl } from '../apis'
 import { ImSpinner2 } from 'react-icons/im'
 import moment from 'moment'
 import Button from '../components/common/Button'
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
 const Attendance = () => {
     const { auth } = useAuth()
@@ -32,6 +32,7 @@ const Attendance = () => {
         fetch()
     }, [auth])
 
+
     let content
 
     if (loading) {
@@ -40,8 +41,11 @@ const Attendance = () => {
                 <div className='p-4 h-[73px] text-[#3A5372] tracking-wide flex justify-center text-[17px]'><ImSpinner2 className='animate-spin' /></div>
             </div>
     } else if (data.status) {
-        content = attend.slice(0).reverse().map((item, index) =>
-            <Link key={index}>
+        content = attend ? attend.slice(0).reverse().map((item, index) =>
+            <NavLink
+                key={index}
+                to={`${item._id}`}
+            >
                 <div className='grid grid-cols-5 bg-white rounded-md mb-2' >
                     <div className='flex flex-col justify-center items-center mx-[20px]'>
                         < img
@@ -77,8 +81,8 @@ const Attendance = () => {
                     </div>
 
                 </div>
-            </Link>
-        )
+            </NavLink>
+        ) : []
     } else {
         content =
             <div className='fixed bg-white rounded-md  w-[69%]'>
@@ -93,13 +97,13 @@ const Attendance = () => {
             </div>
             <div>
                 <div className='flex justify-between mt-[33px] mr-24 ml-2 mb-4'>
-                    <select
+                    <input
                         className='h-[40px] w-[224px] px-5 border border-[#C7C9D9] rounded'
                     // value={title}
                     // onChange={(e) => setTitle(e.target.value)}
-                    >
-                        <option>All</option>
-                    </select>
+                    />
+                    {/* <option>All</option>
+                    </input> */}
 
                 </div>
                 <div className='w-[92%]'>
