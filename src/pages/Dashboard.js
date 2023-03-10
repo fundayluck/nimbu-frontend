@@ -20,6 +20,7 @@ const Dashboard = () => {
     const user = data?.data
     const getId = id?.userId
     const [button, setButton] = useState([])
+    console.log(button);
     const [showModal, setShowModal] = useState(false)
     const { coords, isGeolocationAvailable, isGeolocationEnabled, positionError } =
         useGeolocated({
@@ -46,30 +47,39 @@ const Dashboard = () => {
     }, [auth])
 
     let content;
-    if (button.clock_out && button.clock_in) {
+    if (button.weekend) {
         content =
             <Button
-                name='Clock Out'
+                name='Clock In'
                 disabled
                 className={`bg-[#D9D9D9] text-white px-5 py-1 rounded`}
-                onClick={_toMap}
             />
+    } else {
+        if (button.clock_out && button.clock_in) {
+            content =
+                <Button
+                    name='Clock Out'
+                    disabled
+                    className={`bg-[#D9D9D9] text-white px-5 py-1 rounded`}
+                    onClick={_toMap}
+                />
 
-    } else
-        if (button.clock_out) {
-            content = <Button
-                name='Clock Out'
-                className={`bg-red-400 text-white px-5 py-1 rounded`}
-                onClick={_toMap}
-            />
-        }
-        else {
-            content = <Button
-                name='Clock In'
-                className={`bg-[#64B566] text-white px-5 py-1 rounded`}
-                onClick={_toMap}
-            />
-        }
+        } else
+            if (button.clock_out) {
+                content = <Button
+                    name='Clock Out'
+                    className={`bg-red-400 text-white px-5 py-1 rounded`}
+                    onClick={_toMap}
+                />
+            }
+            else {
+                content = <Button
+                    name='Clock In'
+                    className={`bg-[#64B566] text-white px-5 py-1 rounded`}
+                    onClick={_toMap}
+                />
+            }
+    }
 
     const checkButton = () => {
         if (!isGeolocationAvailable) return <div>Your browser does not support Geolocation</div>;
